@@ -12,11 +12,12 @@ class MainInf:
     number = Instrumen()
     dwells = Instrumen()
     climate = Instrumen()
-    def __init__(self, nickname=str(), weight=str(), number=str(), dwells=str(), climate=str()):
-        self._nickname = nickname
-        self._weight = weight  # вес
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), weight=int(), dwells=str(), climate=str()):
         self._number = number
-        self._dwells = dwells
+        self._nickname = nickname
+        self.typeAnimal = typeAnimal
+        self._weight = weight  # вес
+        self._dwells = dwells  # среда обитания
         self._climate = climate
 ###############################################################################################################################
 class Predator:  # хищные
