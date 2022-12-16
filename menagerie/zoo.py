@@ -34,7 +34,11 @@
 # 3. Сипсок имен нехищных существа
 # 4. Список подводных существ по мере убывания их веса
 # 5. Список наземных животных с именем каджого и местом обитания
-
+from working_files import WorkingFiles, WorkingMethods
+from animal_type import Ground, Underwater, Winged
+listAnimal = WorkingFiles().reading()
+# for name in listAnimal:
+#     print(name.number, name.nickname)
 input('Добро пожаловать в зоопарк')
 
 while True:
@@ -56,8 +60,14 @@ while True:
                            '                                        2) моря\n'
                            '                                        3) океан\n')
         elif animalClass == '3':
-            dwells = input('Являются ли миграционными: 1) да\n'
-                           '                           2) нет\n')
+            dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
+                           '                                        2) горы\n'
+                           '                                        3) степи\n'
+                           '                                        4) реки\n'
+                           '                                        5) моря\n'
+                           '                                        6) океан\n')
+            migratory = input('Являются ли миграционными: 1) да\n'
+                              '                           2) нет\n')
 
         climate = input('Укажите климатические условия: 1) теплые\n'
                         '                               2) холодные\n'
@@ -69,3 +79,5 @@ while True:
         weight = input('Укажите вес животного:\n')
 
         nickname = input('Придумайте кличку для нового жителя зоопарка:\n')
+
+        WorkingMethods().registrationAnimal(animalClass, dwells, migratory, climate, predator, weight, nickname)

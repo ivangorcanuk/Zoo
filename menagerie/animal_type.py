@@ -12,14 +12,15 @@ class MainInf:
     number = Instrumen()
     dwells = Instrumen()
     climate = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=int(), dwells=str(), climate=str()):
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=float(), dwells=str(), climate=str(), clasAnimal=str()):
         self._number = number
         self._nickname = nickname
-        self.typeAnimal = typeAnimal
-        self.predator = predator
+        self._typeAnimal = typeAnimal
+        self._predator = predator
         self._weight = weight  # вес
         self._dwells = dwells  # среда обитания
         self._climate = climate
+        self._clasAnimal = clasAnimal
 ###############################################################################################################################
 # class Predator:  # хищные
 #     pass
@@ -30,17 +31,21 @@ class MainInf:
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
     def __str__(self):
-        pass
+        return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' +\
+               str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
 class Underwater(MainInf):  # подводные
     def __str__(self):
-        pass
+        return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + \
+               str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
 class Winged(MainInf):  # крылатые
     migratory = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=int(), dwells=str(), climate=str(), migratory=str()):
-        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate)
-        self.migratory = migratory  # миграционные
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
+        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
+        self._migratory = migratory  # миграционные
 
     def __str__(self):
-        pass
+        return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\
+               + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + self._migratory + '#'

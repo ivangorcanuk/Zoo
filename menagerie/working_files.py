@@ -16,16 +16,20 @@ class WorkingFiles:
                     obj = None
                     if spTempAnimal[2] == 'наземный':
                         obj = Ground(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                                                  int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
+                                    float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7])
                     elif spTempAnimal[2] == 'подводный':
                         obj = Underwater(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                                     int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
+                                     float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7])
                     elif spTempAnimal[2] == 'крылатый':
                         obj = Winged(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                                     int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
+                                     float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
                     listAnimals.append(obj)
                     spTempAnimal = list()
         return listAnimals
 
     def record(self):  # запись в файл
         pass
+
+class WorkingMethods:
+    def registrationAnimal(self):
+        return 2 + 2
