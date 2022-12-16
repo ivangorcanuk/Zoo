@@ -13,15 +13,7 @@ class WorkingFiles:
                 if s[j] != '\n':
                     spTempAnimal.append(s[j])
                 else:
-                    obj = None
-                    if spTempAnimal[2] == 'наземный':
-                        obj = Ground(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                                    float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7])
-                    elif spTempAnimal[2] == 'подводный':
-                        obj = Underwater(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                                     float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7])
-                    elif spTempAnimal[2] == 'крылатый':
-                        obj = Winged(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
+                    obj = WorkingMethods().registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
                                      float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
                     listAnimals.append(obj)
                     spTempAnimal = list()
@@ -31,5 +23,12 @@ class WorkingFiles:
         pass
 
 class WorkingMethods:
-    def registrationAnimal(self):
-        return 2 + 2
+    def registrationAnimal(self, number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory):
+        obj = None
+        if typeAnimal == 'наземный':
+            obj = Ground(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
+        elif typeAnimal == 'подводный':
+            obj = Underwater(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
+        elif typeAnimal == 'крылатый':
+            obj = Winged(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+        return obj

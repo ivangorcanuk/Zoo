@@ -39,6 +39,7 @@ from animal_type import Ground, Underwater, Winged
 listAnimal = WorkingFiles().reading()
 # for name in listAnimal:
 #     print(name.number, name.nickname)
+
 input('Добро пожаловать в зоопарк')
 
 while True:
@@ -51,15 +52,15 @@ while True:
                             '                          2) подводные\n'
                             '                          3) крылатые\n')
 
-        if animalClass == '1':
+        if animalClass == 'наземные':
             dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
                            '                                        2) горы\n'
                            '                                        3) степи\n')
-        elif animalClass == '2':
+        elif animalClass == 'подводные':
             dwells = input('Укажите среду обитания данного подвида: 1) реки\n'
                            '                                        2) моря\n'
                            '                                        3) океан\n')
-        elif animalClass == '3':
+        elif animalClass == 'крылатые':
             dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
                            '                                        2) горы\n'
                            '                                        3) степи\n'
@@ -69,15 +70,16 @@ while True:
             migratory = input('Являются ли миграционными: 1) да\n'
                               '                           2) нет\n')
 
-        climate = input('Укажите климатические условия: 1) теплые\n'
-                        '                               2) холодные\n'
-                        '                               3) умеренные\n')
+        climate = input('Укажите климатические условия: 1) теплый\n'
+                        '                               2) холодный\n'
+                        '                               3) умеренный\n')
 
         predator = input('Явлиется ли зверь хищником: 1) да\n'
                          '                            2) нет\n')
 
-        weight = input('Укажите вес животного:\n')
+        weight = float(input('Укажите вес животного:\n'))
 
         nickname = input('Придумайте кличку для нового жителя зоопарка:\n')
 
-        WorkingMethods().registrationAnimal(animalClass, dwells, migratory, climate, predator, weight, nickname)
+        obj = WorkingMethods().registrationAnimal(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+        listAnimal.append(obj)
