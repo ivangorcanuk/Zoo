@@ -12,19 +12,20 @@ class MainInf:
     number = Instrumen()
     dwells = Instrumen()
     climate = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), weight=int(), dwells=str(), climate=str()):
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=int(), dwells=str(), climate=str()):
         self._number = number
         self._nickname = nickname
         self.typeAnimal = typeAnimal
+        self.predator = predator
         self._weight = weight  # вес
         self._dwells = dwells  # среда обитания
         self._climate = climate
 ###############################################################################################################################
-class Predator:  # хищные
-    pass
-
-class NonPredator:  # нехищные
-    pass
+# class Predator:  # хищные
+#     pass
+#
+# class NonPredator:  # нехищные
+#     pass
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
@@ -36,5 +37,10 @@ class Underwater(MainInf):  # подводные
         pass
 
 class Winged(MainInf):  # крылатые
+    migratory = Instrumen()
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=int(), dwells=str(), climate=str(), migratory=str()):
+        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate)
+        self.migratory = migratory  # миграционные
+
     def __str__(self):
         pass

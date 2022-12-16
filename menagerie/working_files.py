@@ -3,8 +3,8 @@ class WorkingFiles:
     def reading(self):  # считывание с файла
         with open('animals.txt', 'r', encoding="utf-8") as file:
             self.spisok = file.readlines()
-        listAnimals = list()  # список с комнатами отеля, который будем возвращать
-        spTempAnimal = list()  # список для временного хранения информации о комнатах
+        listAnimals = list()  # список с животными зоопарка, который будем возвращать
+        spTempAnimal = list()  # список для временного хранения информации о животных
         for i in range(len(self.spisok)):
             if self.spisok[i] == '\n':
                 break
@@ -13,16 +13,19 @@ class WorkingFiles:
                 if s[j] != '\n':
                     spTempAnimal.append(s[j])
                 else:
+                    obj = None
                     if spTempAnimal[2] == 'наземный':
-                        listAnimals.append(Ground(spTempAnimal[1], int(spTempAnimal[4]), spTempAnimal[0], spTemporyRoom[4]))
+                        obj = Ground(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
+                                                  int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
                     elif spTempAnimal[2] == 'подводный':
-                        listAnimals.append(Ground(spTemporyRoom[0], int(spTemporyRoom[1]), int(spTemporyRoom[2]),
-                                             int(spTemporyRoom[3]), spTemporyRoom[4], isVideo))
+                        obj = Underwater(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
+                                     int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
                     elif spTempAnimal[2] == 'крылатый':
-                        listAnimals.append(Ground(spTemporyRoom[0], int(spTemporyRoom[1]), int(spTemporyRoom[2]),
-                                             int(spTemporyRoom[3]), spTemporyRoom[4], isVideo))
-                    spTemporyRoom = list()
-        return spAnimal
+                        obj = Winged(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
+                                     int(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6])
+                    listAnimals.append(obj)
+                    spTempAnimal = list()
+        return listAnimals
 
     def record(self):  # запись в файл
         pass
