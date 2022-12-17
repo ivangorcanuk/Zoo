@@ -32,3 +32,6 @@ class WorkingMethods:
         elif typeAnimal == 'крылатый':
             obj = Winged(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         return obj
+
+    def view_lungs_animal(self):
+        pass
