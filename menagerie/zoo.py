@@ -49,8 +49,12 @@ while True:
 
     if menu == '1':
         typeAnimal = input('Выберите класс животного: 1) наземные\n'
-                            '                          2) подводные\n'
-                            '                          3) крылатые\n')
+                           '                          2) подводные\n'
+                           '                          3) крылатые\n')
+        clasAnimal = input('Дайте имя животному:\n')
+        dwells = str()
+        migratory = str()
+        number = '47'
 
         if typeAnimal == 'наземные':
             dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
@@ -83,3 +87,36 @@ while True:
 
         obj = WorkingMethods().registrationAnimal(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         listAnimal.append(obj)
+
+    if menu == '3':
+        menu1 = input('Выберите действие: 1) просмотреть список всех животных\n'
+                      '                   2) выбрать класс животного (наземный, подводный, крылатый)\n'
+                      '                   3) просмотреть хищников (травоядный)\n'
+                      '                   4) просмотреть рейтинг\n')
+
+        if menu1 == '1':
+            for name in listAnimal:
+                print(name.number, name.nickname, name.typeAnimal, name.predator,
+                      name.weight, name.dwells, name.climate, name.clasAnimal, name.migratory)
+
+        elif menu1 == '2':
+            menu1_2 = input('Выбрать класс животного: 1) наземный\n'
+                            '                         2) подводный\n'
+                            '                         3) крылатый\n')
+
+            if menu1_2 == '1':
+                for ground in listAnimal:
+                    if ground.typeAnimal == 'наземный':
+                        print(ground.number, ground.clasAnimal, ground.nickname)
+            elif menu1_2 == '2':
+                for underwater in listAnimal:
+                    if underwater.typeAnimal == 'подводный':
+                        print(underwater.number, underwater.clasAnimal, underwater.nickname)
+            elif menu1_2 == '3':
+                for winged in listAnimal:
+                    if winged.typeAnimal == 'крылатый':
+                        print(winged.number, winged.clasAnimal, winged.nickname)
+
+        elif menu1 == '3':
+            menu1_2 = input('Выберите тип: 1) хищник\n'
+                            '              2) травоядный\n')
