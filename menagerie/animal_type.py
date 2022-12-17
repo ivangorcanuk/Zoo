@@ -7,12 +7,15 @@ class Instrumen:
         setattr(instance, self.name, value)
 
 class MainInf:
-    nickname = Instrumen()
-    weight = Instrumen()
     number = Instrumen()
+    nickname = Instrumen()
+    typeAnimal = Instrumen()
+    predator = Instrumen()
+    weight = Instrumen()
     dwells = Instrumen()
     climate = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=float(), dwells=str(), climate=str(), clasAnimal=str()):
+    clasAnimal = Instrumen()
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
         self._number = number
         self._nickname = nickname
         self._typeAnimal = typeAnimal
@@ -21,6 +24,15 @@ class MainInf:
         self._dwells = dwells  # среда обитания
         self._climate = climate
         self._clasAnimal = clasAnimal
+        self._migratory = migratory
+
+    @property
+    def migratory(self):
+        return self._migratory
+
+    @migratory.setter
+    def migratory(self, migratory):
+        self._migratory = None
 ###############################################################################################################################
 # class Predator:  # хищные
 #     pass
@@ -40,11 +52,19 @@ class Underwater(MainInf):  # подводные
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
 class Winged(MainInf):  # крылатые
-    migratory = Instrumen()
+    #migratory = Instrumen()
     def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
                  weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
-        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
-        self._migratory = migratory  # миграционные
+        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+        #self._migratory = migratory  # миграционные
+
+    @property
+    def migratory(self):
+        return self._migratory
+
+    @migratory.setter
+    def migratory(self, migratory):
+        self._migratory = migratory
 
     def __str__(self):
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\

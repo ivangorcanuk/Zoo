@@ -38,7 +38,7 @@ from working_files import WorkingFiles, WorkingMethods
 from animal_type import Ground, Underwater, Winged
 listAnimal = WorkingFiles().reading()
 # for name in listAnimal:
-#     print(name.number, name.nickname)
+#     print(name.number, name.nickname, name.typeAnimal, name.predator,name.weight, name.dwells, name.climate, name.clasAnimal, name.migratory)
 
 input('Добро пожаловать в зоопарк')
 
@@ -48,19 +48,19 @@ while True:
                  '                   3) посмотреть животных\n')
 
     if menu == '1':
-        animalClass = input('Выберите класс животного: 1) наземные\n'
+        typeAnimal = input('Выберите класс животного: 1) наземные\n'
                             '                          2) подводные\n'
                             '                          3) крылатые\n')
 
-        if animalClass == 'наземные':
+        if typeAnimal == 'наземные':
             dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
                            '                                        2) горы\n'
                            '                                        3) степи\n')
-        elif animalClass == 'подводные':
+        elif typeAnimal == 'подводные':
             dwells = input('Укажите среду обитания данного подвида: 1) реки\n'
                            '                                        2) моря\n'
                            '                                        3) океан\n')
-        elif animalClass == 'крылатые':
+        elif typeAnimal == 'крылатые':
             dwells = input('Укажите среду обитания данного подвида: 1) леса\n'
                            '                                        2) горы\n'
                            '                                        3) степи\n'
