@@ -37,15 +37,15 @@ class MainInf:
     def migratory(self, migratory):
         self._migratory = None
 ###############################################################################################################################
-class Predator:  # хищные
-    def view_large(self):  # просмотр самых больших хищников
-        pass
-
-class Herbivorous:  # травоядный
-    def viewing_name(self, listAnimal):  # просмотр кличек травоядных существ
-        for herbivorous in listAnimal:
-            if herbivorous.predator == 'нет':
-                print(herbivorous.nickname, herbivorous.clasAnimal)
+# class Predator:  # хищные
+#     def view_large(self):  # просмотр самых больших хищников
+#         pass
+#
+# class Herbivorous:  # травоядный
+#     def viewing_name_herbivorous(self, listAnimal):  # просмотр кличек травоядных существ
+#         for herbivorous in listAnimal:
+#             if herbivorous.predator == 'нет':
+#                 print(herbivorous.nickname, herbivorous.clasAnimal)
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
@@ -56,7 +56,7 @@ class Ground(MainInf):  # наземные
     def viewing_habitats(self, listAnimal):  # просмотр наземных животных с кличкой каждого и местом обитания
         for ground in listAnimal:
             if ground.typeAnimal == 'наземный':
-                print(ground.nickname, ground.dwells)
+                print(ground.nickname, ground.clasAnimal, ground.dwells)
 
 
 class Underwater(MainInf):  # подводные
@@ -64,11 +64,14 @@ class Underwater(MainInf):  # подводные
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + \
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
-    def __gt__(self, other):
-        return self.weight < other
-
-    def view_descending_weight(self, listAnimal):  # просмотр подводных существ по мере убывания их веса
-        pass
+    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+        for i in range(len(listUnderwater)):
+            for j in range(i, len(listUnderwater)):
+                if listUnderwater[i] < listUnderwater[j]:
+                    f = listUnderwater[j]
+                    listUnderwater[j] = listUnderwater[i]
+                    listUnderwater[i] = f
+            print(listUnderwater[i].nickname, listUnderwater[i].clasAnimal, listUnderwater[i].weight)
 
 class Winged(MainInf):  # крылатые
     #migratory = Instrumen()

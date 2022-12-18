@@ -36,14 +36,14 @@
 # 5. Список наземных животных с именем каджого и местом обитания
 
 from working_files import WorkingFiles, WorkingMethods
-from animal_type import Ground, Underwater, Winged, Herbivorous
+from animal_type import Ground, Underwater, Winged
 
 listAnimal = WorkingFiles().reading()  # создаем основной список с животными зоопарка
-listPredator = WorkingMethods().animal_sorting('да', listAnimal)  # создаем список с хищными животными
-listHerbivorous = WorkingMethods().animal_sorting('нет', listAnimal)  # создаем список с травоядными животными
-listGround = WorkingMethods().animal_sorting('наземный', listAnimal)  # создаем список с наземными животными
-listUnderwater = WorkingMethods().animal_sorting('подводный', listAnimal)  # создаем список с подводными животными
-listWinged = WorkingMethods().animal_sorting('крылатый', listAnimal)  # создаем список с крылатыми животными
+listPredator = WorkingMethods().animal_sorting_tupe('да', listAnimal)  # создаем список с хищными животными
+listHerbivorous = WorkingMethods().animal_sorting_tupe('нет', listAnimal)  # создаем список с травоядными животными
+listGround = WorkingMethods().animal_sorting_clas('наземный', listAnimal)  # создаем список с наземными животными
+listUnderwater = WorkingMethods().animal_sorting_clas('подводный', listAnimal)  # создаем список с подводными животными
+listWinged = WorkingMethods().animal_sorting_clas('крылатый', listAnimal)  # создаем список с крылатыми животными
 
 # for name in listWinged:
 #     print(name.number, name.nickname, name.typeAnimal, name.predator,name.weight, name.dwells, name.climate, name.clasAnimal, name.migratory)
@@ -107,13 +107,13 @@ while True:
             WorkingMethods().view_lungs_animal(listAnimal)  # вызвали функцию для просмотра 3-ёх самых легких существа зоопарка
 
         elif menu1 == '2':
-            pass
+            WorkingMethods().viewing_large_animal(listPredator)  # вызвали функцию для просмотра 5-и самых больших хищников
 
         elif menu1 == '3':
-            Herbivorous().viewing_name(listAnimal)  # вызвали функцию для просмотра кличек травоядных существ
+            WorkingMethods().viewing_name_herbivorous(listHerbivorous)  # вызвали функцию для просмотра кличек травоядных существ
 
         elif menu1 == '4':
-            Underwater().view_descending_weight(listAnimal)  # вызвали функцию для просмотрa подводных существ по мере убывания их веса
+            Underwater().view_descending_weight(listUnderwater)  # вызвали функцию для просмотрa подводных существ по мере убывания их веса
 
         elif menu1 == '5':
             Ground().viewing_habitats(listAnimal)  # вызвали функцию для просмотра наземных животных с кличкой каждого и местом обитания

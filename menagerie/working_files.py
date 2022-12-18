@@ -44,11 +44,32 @@ class WorkingMethods:
             if i == 2:
                 break
 
-    def animal_sorting(self, tupe, listAnimal):  # сортировка животных
+    def animal_sorting_tupe(self, tupe, listAnimal):  # сортировка животных на хищных и травоядных
         listOb = list()
         for animal in listAnimal:
-            if tupe == animal.typeAnimal:
+            if tupe == animal.predator:
                 listOb.append(animal)
         return listOb
 
+    def animal_sorting_clas(self, clas, listAnimal):  # сортировка животных на наземные, подводные и крылатые
+        listOb = list()
+        for animal in listAnimal:
+            if clas == animal.typeAnimal:
+                listOb.append(animal)
+        return listOb
 
+    def viewing_name_herbivorous(self, listHerbivorous):  # просмотр кличек травоядных существ
+        for herbivorous in listHerbivorous:
+            if herbivorous.predator == 'нет':
+                print(herbivorous.nickname, herbivorous.clasAnimal)
+
+    def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
+        for i in range(len(listPredator)):
+            for j in range(i, len(listPredator)):
+                if listPredator[i] < listPredator[j]:
+                    f = listPredator[j]
+                    listPredator[j] = listPredator[i]
+                    listPredator[i] = f
+            print(listPredator[i].nickname, listPredator[i].clasAnimal, listPredator[i].weight)
+            if i == 4:
+                break
