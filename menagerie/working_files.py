@@ -19,8 +19,11 @@ class WorkingFiles:
                     spTempAnimal = list()
         return listAnimals
 
-    def record(self):  # запись в файл
-        pass
+    def record(self, listAnimal):  # запись в файл
+        with open('animals.txt', 'w', encoding="utf-8") as file:
+            for animal in listAnimal:
+                file.writelines(str(animal) + '\n')
+            file.close()
 
 class WorkingMethods:
     def registrationAnimal(self, number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory):
