@@ -34,13 +34,21 @@
 # 3) Сипсок имен нехищных существа
 # 4) Список подводных существ по мере убывания их веса
 # 5. Список наземных животных с именем каджого и местом обитания
+
 from working_files import WorkingFiles, WorkingMethods
 from animal_type import Ground, Underwater, Winged, Herbivorous
-listAnimal = WorkingFiles().reading()
-# for name in listAnimal:
+
+listAnimal = WorkingFiles().reading()  # создаем основной список с животными зоопарка
+listPredator = WorkingMethods().animal_sorting('да', listAnimal)  # создаем список с хищными животными
+listHerbivorous = WorkingMethods().animal_sorting('нет', listAnimal)  # создаем список с травоядными животными
+listGround = WorkingMethods().animal_sorting('наземный', listAnimal)  # создаем список с наземными животными
+listUnderwater = WorkingMethods().animal_sorting('подводный', listAnimal)  # создаем список с подводными животными
+listWinged = WorkingMethods().animal_sorting('крылатый', listAnimal)  # создаем список с крылатыми животными
+
+# for name in listWinged:
 #     print(name.number, name.nickname, name.typeAnimal, name.predator,name.weight, name.dwells, name.climate, name.clasAnimal, name.migratory)
 
-input('Добро пожаловать в зоопарк')
+input('Добро пожаловать в зоопарк\n')
 
 while True:
     menu = input('Выберите действие: 1) добавить животное\n'
@@ -91,7 +99,7 @@ while True:
     if menu == '3':
         menu1 = input('Выберите действие: 1) топ 3 самых легких существа зоопарка\n'
                       '                   2) топ 5 самых больших хищников\n'
-                      '                   3) сипсок имен нехищных существ\n'
+                      '                   3) сипсок имен травоядных существ\n'
                       '                   4) список подводных существ по мере убывания их веса\n'
                       '                   5) список наземных животных с именем каджого и местом обитания\n')
 
@@ -105,7 +113,7 @@ while True:
             Herbivorous().viewing_name(listAnimal)  # вызвали функцию для просмотра кличек травоядных существ
 
         elif menu1 == '4':
-            pass
+            Underwater().view_descending_weight(listAnimal)  # вызвали функцию для просмотрa подводных существ по мере убывания их веса
 
         elif menu1 == '5':
-            Ground().dwells(listAnimal)  # вызвали функцию для просмотра наземных животных с кличкой каждого и местом обитания
+            Ground().viewing_habitats(listAnimal)  # вызвали функцию для просмотра наземных животных с кличкой каждого и местом обитания

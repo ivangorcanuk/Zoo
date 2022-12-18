@@ -26,6 +26,9 @@ class MainInf:
         self._clasAnimal = clasAnimal
         self._migratory = migratory
 
+    def __gt__(self, other):
+        return self._weight < other
+
     @property
     def migratory(self):
         return self._migratory
@@ -61,7 +64,10 @@ class Underwater(MainInf):  # подводные
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + \
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
-    def view_descending_weight(self):  # просмотр подводных существ по мере убывания их веса
+    def __gt__(self, other):
+        return self.weight < other
+
+    def view_descending_weight(self, listAnimal):  # просмотр подводных существ по мере убывания их веса
         pass
 
 class Winged(MainInf):  # крылатые
