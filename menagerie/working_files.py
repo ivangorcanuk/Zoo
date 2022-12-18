@@ -33,10 +33,16 @@ class WorkingMethods:
             obj = Winged(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         return obj
 
-    # def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
-    #     i = 0
-    #     while i <= 3:
-    #         listAnimal[i]
+    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
+        for i in range(len(listAnimal)):
+            for j in range(i, len(listAnimal)):
+                if listAnimal[i] > listAnimal[j]:
+                    f = listAnimal[j]
+                    listAnimal[j] = listAnimal[i]
+                    listAnimal[i] = f
+            print(listAnimal[i].nickname, listAnimal[i].clasAnimal, listAnimal[i].weight)
+            if i == 2:
+                break
 
     def animal_sorting(self, tupe, listAnimal):  # сортировка животных
         listOb = list()

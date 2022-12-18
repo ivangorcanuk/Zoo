@@ -104,7 +104,7 @@ while True:
                       '                   5) список наземных животных с именем каджого и местом обитания\n')
 
         if menu1 == '1':
-            pass
+            WorkingMethods().view_lungs_animal(listAnimal)  # вызвали функцию для просмотра 3-ёх самых легких существа зоопарка
 
         elif menu1 == '2':
             pass
