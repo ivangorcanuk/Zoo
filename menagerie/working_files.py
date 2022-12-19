@@ -76,3 +76,7 @@ class WorkingMethods:
             print(listPredator[i].nickname, listPredator[i].clasAnimal, listPredator[i].weight)
             if i == 4:
                 break
+
+    def number_assignment(self, listAnimal):  # присвоение уникального номера животному
+        for animal in listAnimal:
+            pass
