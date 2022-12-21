@@ -37,15 +37,11 @@ class MainInf:
     def migratory(self, migratory):
         self._migratory = None
 ###############################################################################################################################
-# class Predator:  # хищные
-#     def view_large(self):  # просмотр самых больших хищников
-#         pass
-#
-# class Herbivorous:  # травоядный
-#     def viewing_name_herbivorous(self, listAnimal):  # просмотр кличек травоядных существ
-#         for herbivorous in listAnimal:
-#             if herbivorous.predator == 'нет':
-#                 print(herbivorous.nickname, herbivorous.clasAnimal)
+class Predator:  # хищные
+    pass
+
+class Herbivorous:  # травоядный
+    pass
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
@@ -91,3 +87,47 @@ class Winged(MainInf):  # крылатые
     def __str__(self):
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\
                + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + self._migratory + '#'
+
+###########################################################################################################################################
+
+class Parrot(Winged, Herbivorous):  # попугай
+    pass
+
+class Otter(Underwater, Predator):  # выдра
+    pass
+
+class Wolf(Ground, Predator):  # волк
+    pass
+
+class Hare(Ground, Herbivorous):  # заец
+    pass
+
+class Roe(Ground, Herbivorous):  # косуля
+    pass
+
+class Buffalo(Ground, Herbivorous):  # бизон
+    pass
+
+class Ostrich(Winged, Herbivorous):  # страус
+    pass
+
+class Dolphin(Underwater, Herbivorous):  # дельфин
+    pass
+
+class Tiger(Ground, Predator):  # тигр
+    pass
+
+class Octopus(Underwater, Herbivorous):  # осьминог
+    pass
+
+class Crane(Winged, Herbivorous):  # журавль
+    pass
+
+class Pike(Underwater, Predator):  # щука
+    pass
+
+class Zebra(Ground, Herbivorous):  # зебра
+    pass
+
+class Pigeon(Winged, Herbivorous):  # голубь
+    pass
