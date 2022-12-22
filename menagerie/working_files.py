@@ -28,47 +28,37 @@ class WorkingFiles:
 class WorkingMethods:
     def registrationAnimal(self, number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory):
         obj = None
-        listRt = [number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal]
+        predator = predator == 'да'
+        migratory = migratory == 'да'
         if clasAnimal == 'попугай':
-            obj = Parrot(listRt.append(migratory))
+            obj = Parrot(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         elif clasAnimal == 'выдра':
-            obj = Otter(listRt)
+            obj = Otter(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'волк':
-            obj = Wolf(listRt)
+            obj = Wolf(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'заец':
-            obj = Hare(listRt)
+            obj = Hare(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'косуля':
-            obj = Roe(listRt)
+            obj = Roe(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'бизон':
-            obj = Buffalo(listRt)
+            obj = Buffalo(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'страус':
-            obj = Ostrich(listRt.append(migratory))
+            obj = Ostrich(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         elif clasAnimal == 'дельфин':
-            obj = Dolphin(listRt)
+            obj = Dolphin(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'тигр':
-            obj = Tiger(listRt)
+            obj = Tiger(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'осьминог':
-            obj = Octopus(listRt)
+            obj = Octopus(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'журавль':
-            obj = Crane(listRt.append(migratory))
+            obj = Crane(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         elif clasAnimal == 'щука':
-            obj = Pike(listRt)
+            obj = Pike(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'зебра':
-            obj = Zebra(listRt)
+            obj = Zebra(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         elif clasAnimal == 'голубь':
-            obj = Pigeon(listRt.append(migratory))
+            obj = Pigeon(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         return obj
-
-    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
-        for i in range(len(listAnimal)):
-            for j in range(i, len(listAnimal)):
-                if listAnimal[i] > listAnimal[j]:
-                    f = listAnimal[j]
-                    listAnimal[j] = listAnimal[i]
-                    listAnimal[i] = f
-            print(listAnimal[i].nickname, listAnimal[i].clasAnimal, listAnimal[i].weight)
-            if i == 2:
-                break
 
     def animal_sorting_tupe(self, tupe, listAnimal):  # сортировка животных на хищных и травоядных
         listOb = list()
@@ -84,10 +74,16 @@ class WorkingMethods:
                 listOb.append(animal)
         return listOb
 
-    def viewing_name_herbivorous(self, listHerbivorous):  # просмотр кличек травоядных существ
-        for herbivorous in listHerbivorous:
-            if herbivorous.predator == 'нет':
-                print(herbivorous.nickname, herbivorous.clasAnimal)
+    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
+        for i in range(len(listAnimal)):
+            for j in range(i, len(listAnimal)):
+                if listAnimal[i] > listAnimal[j]:
+                    f = listAnimal[j]
+                    listAnimal[j] = listAnimal[i]
+                    listAnimal[i] = f
+            print(listAnimal[i].nickname, listAnimal[i].clasAnimal, listAnimal[i].weight)
+            if i == 2:
+                break
 
     def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
         for i in range(len(listPredator)):
@@ -99,6 +95,23 @@ class WorkingMethods:
             print(listPredator[i].nickname, listPredator[i].clasAnimal, listPredator[i].weight)
             if i == 4:
                 break
+
+    def viewing_name_herbivorous(self, listHerbivorous):  # просмотр кличек травоядных существ
+        for herbivorous in listHerbivorous:
+            print(herbivorous.nickname, herbivorous.clasAnimal)
+
+    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+        for i in range(len(listUnderwater)):
+            for j in range(i, len(listUnderwater)):
+                if listUnderwater[i] < listUnderwater[j]:
+                    f = listUnderwater[j]
+                    listUnderwater[j] = listUnderwater[i]
+                    listUnderwater[i] = f
+            print(listUnderwater[i].nickname, listUnderwater[i].clasAnimal, listUnderwater[i].weight)
+
+    def viewing_habitats(self, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
+        for ground in listGround:
+            print(ground.nickname, ground.clasAnimal, ground.dwells)
 
     def number_assignment(self, listAnimal):  # присвоение уникального номера животному
         for animal in listAnimal:

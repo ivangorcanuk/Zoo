@@ -41,9 +41,10 @@ from working_files import WorkingFiles, WorkingMethods
 from animal_type import Ground, Underwater, Winged
 
 listAnimal = WorkingFiles().reading()  # создаем основной список с животными зоопарка
+clasMetod = WorkingMethods()
 
-# for name in listWinged:
-#     print(name.number, name.nickname, name.typeAnimal, name.predator,name.weight, name.dwells, name.climate, name.clasAnimal, name.migratory)
+for name in listAnimal:
+    print(name.predator, name.clasAnimal, name.migratory)
 
 input('Добро пожаловать в зоопарк\n')
 
@@ -94,8 +95,8 @@ while True:
         listAnimal.append(obj)
 
     if menu == '3':
-        listPredator = WorkingMethods().animal_sorting_tupe('да', listAnimal)  # создаем список с хищными животными
-        listHerbivorous = WorkingMethods().animal_sorting_tupe('нет', listAnimal)  # создаем список с травоядными животными
+        listPredator = WorkingMethods().animal_sorting_tupe(True, listAnimal)  # создаем список с хищными животными
+        listHerbivorous = WorkingMethods().animal_sorting_tupe(False, listAnimal)  # создаем список с травоядными животными
         listGround = WorkingMethods().animal_sorting_clas('наземный', listAnimal)  # создаем список с наземными животными
         listUnderwater = WorkingMethods().animal_sorting_clas('подводный', listAnimal)  # создаем список с подводными животными
         listWinged = WorkingMethods().animal_sorting_clas('крылатый', listAnimal)  # создаем список с крылатыми животными
@@ -104,27 +105,27 @@ while True:
                           '                   2) топ 5 самых больших хищников\n'
                           '                   3) сипсок имен травоядных существ\n'
                           '                   4) список подводных существ по мере убывания их веса\n'
-                          '                   5) список наземных животных с именем каджого и местом обитания'
+                          '                   5) список наземных животных с именем каджого и местом обитания\n'
                           '                   6) выход\n')
 
             if menu1 == '1':
-                WorkingMethods().view_lungs_animal(listAnimal)  # вызвали функцию для просмотра 3-ёх самых легких существа зоопарка
+                clasMetod.view_lungs_animal(listAnimal)  # вызвали функцию для просмотра 3-ёх самых легких существа зоопарка
                 input()
 
             elif menu1 == '2':
-                WorkingMethods().viewing_large_animal(listPredator)  # вызвали функцию для просмотра 5-и самых больших хищников
+                clasMetod.viewing_large_animal(listPredator)  # вызвали функцию для просмотра 5-и самых больших хищников
                 input()
 
             elif menu1 == '3':
-                WorkingMethods().viewing_name_herbivorous(listHerbivorous)  # вызвали функцию для просмотра кличек травоядных существ
+                clasMetod.viewing_name_herbivorous(listHerbivorous)  # вызвали функцию для просмотра кличек травоядных существ
                 input()
 
             elif menu1 == '4':
-                Underwater().view_descending_weight(listUnderwater)  # вызвали функцию для просмотрa подводных существ по мере убывания их веса
+                clasMetod.view_descending_weight(listUnderwater)  # вызвали функцию для просмотрa подводных существ по мере убывания их веса
                 input()
 
             elif menu1 == '5':
-                Ground().viewing_habitats(listAnimal)  # вызвали функцию для просмотра наземных животных с кличкой каждого и местом обитания
+                clasMetod.viewing_habitats(listAnimal)  # вызвали функцию для просмотра наземных животных с кличкой каждого и местом обитания
                 input()
 
             else:

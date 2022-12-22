@@ -49,30 +49,15 @@ class Ground(MainInf):  # наземные
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' +\
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
-    def viewing_habitats(self, listAnimal):  # просмотр наземных животных с кличкой каждого и местом обитания
-        for ground in listAnimal:
-            if ground.typeAnimal == 'наземный':
-                print(ground.nickname, ground.clasAnimal, ground.dwells)
-
-
 class Underwater(MainInf):  # подводные
     def __str__(self):
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + \
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
-    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
-        for i in range(len(listUnderwater)):
-            for j in range(i, len(listUnderwater)):
-                if listUnderwater[i] < listUnderwater[j]:
-                    f = listUnderwater[j]
-                    listUnderwater[j] = listUnderwater[i]
-                    listUnderwater[i] = f
-            print(listUnderwater[i].nickname, listUnderwater[i].clasAnimal, listUnderwater[i].weight)
-
 class Winged(MainInf):  # крылатые
-    # def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
-    #              weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
-    #     super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+    def __str__(self):
+        return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\
+               + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + self._migratory + '#'
 
     @property
     def migratory(self):
@@ -81,10 +66,6 @@ class Winged(MainInf):  # крылатые
     @migratory.setter
     def migratory(self, migratory):
         self._migratory = migratory
-
-    def __str__(self):
-        return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\
-               + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + self._migratory + '#'
 
 ###########################################################################################################################################
 
