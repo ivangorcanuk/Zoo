@@ -33,9 +33,9 @@ class MainInf:
     def migratory(self):
         return self._migratory
 
-    @migratory.setter
-    def migratory(self, migratory):
-        self._migratory = None
+    def inf(self):
+        print('вызвали класс')
+
 ###############################################################################################################################
 class Predator:  # хищные
     pass
@@ -70,11 +70,9 @@ class Underwater(MainInf):  # подводные
             print(listUnderwater[i].nickname, listUnderwater[i].clasAnimal, listUnderwater[i].weight)
 
 class Winged(MainInf):  # крылатые
-    #migratory = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
-                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
-        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
-        #self._migratory = migratory  # миграционные
+    # def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+    #              weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
+    #     super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
 
     @property
     def migratory(self):
@@ -91,43 +89,57 @@ class Winged(MainInf):  # крылатые
 ###########################################################################################################################################
 
 class Parrot(Winged, Herbivorous):  # попугай
-    pass
+    def inf(self):
+        print('вызвали класс попугай')
 
 class Otter(Underwater, Predator):  # выдра
-    pass
+    def inf(self):
+        print('вызвали класс выдра')
 
 class Wolf(Ground, Predator):  # волк
-    pass
+    def inf(self):
+        print('вызвали класс волк')
 
 class Hare(Ground, Herbivorous):  # заец
-    pass
+    def inf(self):
+        print('вызвали класс заец')
 
 class Roe(Ground, Herbivorous):  # косуля
-    pass
+    def inf(self):
+        print('вызвали класс косуля')
 
 class Buffalo(Ground, Herbivorous):  # бизон
-    pass
+    def inf(self):
+        print('вызвали класс бизон')
 
 class Ostrich(Winged, Herbivorous):  # страус
-    pass
+    def inf(self):
+        print('вызвали класс страус')
 
 class Dolphin(Underwater, Herbivorous):  # дельфин
-    pass
+    def inf(self):
+        print('вызвали класс дельфин')
 
 class Tiger(Ground, Predator):  # тигр
-    pass
+    def inf(self):
+        print('вызвали класс тигр')
 
 class Octopus(Underwater, Herbivorous):  # осьминог
-    pass
+    def inf(self):
+        print('вызвали класс осьминог')
 
 class Crane(Winged, Herbivorous):  # журавль
-    pass
+    def inf(self):
+        print('вызвали класс журавль')
 
 class Pike(Underwater, Predator):  # щука
-    pass
+    def inf(self):
+        print('вызвали класс щука')
 
 class Zebra(Ground, Herbivorous):  # зебра
-    pass
+    def inf(self):
+        print('вызвали класс зебра')
 
 class Pigeon(Winged, Herbivorous):  # голубь
-    pass
+    def inf(self):
+        print('вызвали класс голубь')

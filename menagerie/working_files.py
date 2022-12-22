@@ -1,4 +1,4 @@
-from animal_type import Ground, Underwater, Winged
+from animal_type import Parrot, Otter, Wolf, Hare, Roe, Buffalo, Ostrich, Dolphin, Tiger, Octopus, Crane, Pike, Zebra, Pigeon
 class WorkingFiles:
     def reading(self):  # считывание с файла
         with open('animals.txt', 'r', encoding="utf-8") as file:
@@ -28,12 +28,35 @@ class WorkingFiles:
 class WorkingMethods:
     def registrationAnimal(self, number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory):
         obj = None
-        if typeAnimal == 'наземный':
-            obj = Ground(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
-        elif typeAnimal == 'подводный':
-            obj = Underwater(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
-        elif typeAnimal == 'крылатый':
-            obj = Winged(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+        listRt = [number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal]
+        if clasAnimal == 'попугай':
+            obj = Parrot(listRt.append(migratory))
+        elif clasAnimal == 'выдра':
+            obj = Otter(listRt)
+        elif clasAnimal == 'волк':
+            obj = Wolf(listRt)
+        elif clasAnimal == 'заец':
+            obj = Hare(listRt)
+        elif clasAnimal == 'косуля':
+            obj = Roe(listRt)
+        elif clasAnimal == 'бизон':
+            obj = Buffalo(listRt)
+        elif clasAnimal == 'страус':
+            obj = Ostrich(listRt.append(migratory))
+        elif clasAnimal == 'дельфин':
+            obj = Dolphin(listRt)
+        elif clasAnimal == 'тигр':
+            obj = Tiger(listRt)
+        elif clasAnimal == 'осьминог':
+            obj = Octopus(listRt)
+        elif clasAnimal == 'журавль':
+            obj = Crane(listRt.append(migratory))
+        elif clasAnimal == 'щука':
+            obj = Pike(listRt)
+        elif clasAnimal == 'зебра':
+            obj = Zebra(listRt)
+        elif clasAnimal == 'голубь':
+            obj = Pigeon(listRt.append(migratory))
         return obj
 
     def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
