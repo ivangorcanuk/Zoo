@@ -38,10 +38,18 @@ class MainInf:
 
 ###############################################################################################################################
 class Predator:  # хищные
-    pass
+    def __init__(self):
+        self._listVictims = list()
+
+    def add_victim(self, victim):
+        self._listVictims.append(victim)
 
 class Herbivorous:  # травоядный
-    pass
+    def __init__(self):
+        self._listFood = list()
+
+    def add_food(self, food):
+        self._listFood.append(food)
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные

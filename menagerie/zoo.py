@@ -87,19 +87,21 @@ while True:
         predator = input('Явлиется ли зверь хищником: 1) да\n'
                          '                            2) нет\n')
 
+        food = [i for i in input('Какую пищу употребляет:\n').split()]
+
         weight = float(input('Укажите вес животного:\n'))
 
         nickname = input('Придумайте кличку для нового жителя зоопарка:\n')
 
-        obj = WorkingMethods().registrationAnimal(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
+        obj = clasMetod.registrationAnimal(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, migratory)
         listAnimal.append(obj)
 
     if menu == '3':
-        listPredator = WorkingMethods().animal_sorting_tupe(True, listAnimal)  # создаем список с хищными животными
-        listHerbivorous = WorkingMethods().animal_sorting_tupe(False, listAnimal)  # создаем список с травоядными животными
-        listGround = WorkingMethods().animal_sorting_clas('наземный', listAnimal)  # создаем список с наземными животными
-        listUnderwater = WorkingMethods().animal_sorting_clas('подводный', listAnimal)  # создаем список с подводными животными
-        listWinged = WorkingMethods().animal_sorting_clas('крылатый', listAnimal)  # создаем список с крылатыми животными
+        listPredator = clasMetod.animal_sorting_tupe(True, listAnimal)  # создаем список с хищными животными
+        listHerbivorous = clasMetod.animal_sorting_tupe(False, listAnimal)  # создаем список с травоядными животными
+        listGround = clasMetod.animal_sorting_clas('наземный', listAnimal)  # создаем список с наземными животными
+        listUnderwater = clasMetod.animal_sorting_clas('подводный', listAnimal)  # создаем список с подводными животными
+        listWinged = clasMetod.animal_sorting_clas('крылатый', listAnimal)  # создаем список с крылатыми животными
         while True:
             menu1 = input('Выберите действие: 1) топ 3 самых легких существа зоопарка\n'
                           '                   2) топ 5 самых больших хищников\n'
