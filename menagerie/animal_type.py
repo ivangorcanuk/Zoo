@@ -15,7 +15,8 @@ class MainInf:
     dwells = Instrumen()
     climate = Instrumen()
     clasAnimal = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(), weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str()):
         self._number = number
         self._nickname = nickname
         self._typeAnimal = typeAnimal
@@ -24,32 +25,23 @@ class MainInf:
         self._dwells = dwells  # среда обитания
         self._climate = climate
         self._clasAnimal = clasAnimal
-        self._migratory = migratory
 
     def __gt__(self, other):
         return self._weight < other
-
-    @property
-    def migratory(self):
-        return self._migratory
 
     def inf(self):
         print('вызвали класс')
 
 ###############################################################################################################################
 class Predator:  # хищные
-    def __init__(self):
-        self._listVictims = list()
-
-    def add_victim(self, victim):
-        self._listVictims.append(victim)
+    listVictims = Instrumen()
+    def __init__(self, listVictims):
+        self._listVictims = listVictims
 
 class Herbivorous:  # травоядный
-    def __init__(self):
-        self._listFood = list()
-
-    def add_food(self, food):
-        self._listFood.append(food)
+    listFood = Instrumen()
+    def __init__(self, listFood):
+        self._listFood = listFood
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
@@ -63,17 +55,15 @@ class Underwater(MainInf):  # подводные
                str(self._weight) + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + '-' + '#'
 
 class Winged(MainInf):  # крылатые
+    migratory = Instrumen()
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
+        super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
+        self._migratory = migratory
+
     def __str__(self):
         return self._number + '#' + self._nickname + '#' + self._typeAnimal + '#' + self._predator + '#' + str(self._weight)\
                + '#' + self._dwells + '#' + self._climate + '#' + self._clasAnimal + self._migratory + '#'
-
-    @property
-    def migratory(self):
-        return self._migratory
-
-    @migratory.setter
-    def migratory(self, migratory):
-        self._migratory = migratory
 
 ###########################################################################################################################################
 
