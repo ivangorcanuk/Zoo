@@ -15,8 +15,8 @@ class MainInf:
     dwells = Instrumen()
     climate = Instrumen()
     clasAnimal = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
-                 weight=float(), dwells=str(), climate=str(), clasAnimal=str()):
+    def __init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal):
         self._number = number
         self._nickname = nickname
         self._typeAnimal = typeAnimal
@@ -34,14 +34,14 @@ class MainInf:
 
 ###############################################################################################################################
 class Predator:  # хищные
-    listVictims = Instrumen()
-    def __init__(self, listVictims):
-        self._listVictims = listVictims
+    food = Instrumen()
+    def __init__(self, food):
+        self._food = food
 
 class Herbivorous:  # травоядный
-    listFood = Instrumen()
-    def __init__(self, listFood):
-        self._listFood = listFood
+    food = Instrumen()
+    def __init__(self, food):
+        self._food = food
 
 ###############################################################################################################################
 class Ground(MainInf):  # наземные
@@ -56,8 +56,8 @@ class Underwater(MainInf):  # подводные
 
 class Winged(MainInf):  # крылатые
     migratory = Instrumen()
-    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
-                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), migratory=str()):
+    def __init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal, migratory):
         super().__init__(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal)
         self._migratory = migratory
 
@@ -68,57 +68,128 @@ class Winged(MainInf):  # крылатые
 ###########################################################################################################################################
 
 class Parrot(Winged, Herbivorous):  # попугай
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str(), migratory=str()):
+        Winged.__init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal, migratory)
+        Herbivorous.__init__(self, food)
+
     def inf(self):
         print('вызвали класс попугай')
 
 class Otter(Underwater, Predator):  # выдра
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Underwater.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс выдра')
 
 class Wolf(Ground, Predator):  # волк
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс волк')
 
 class Hare(Ground, Herbivorous):  # заец
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс заец')
 
 class Roe(Ground, Herbivorous):  # косуля
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс косуля')
 
 class Buffalo(Ground, Herbivorous):  # бизон
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс бизон')
 
 class Ostrich(Winged, Herbivorous):  # страус
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str(), migratory=str()):
+        Winged.__init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal, migratory)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс страус')
 
-class Dolphin(Underwater, Herbivorous):  # дельфин
+class Dolphin(Underwater, Predator):  # дельфин
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Underwater.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс дельфин')
 
 class Tiger(Ground, Predator):  # тигр
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс тигр')
 
-class Octopus(Underwater, Herbivorous):  # осьминог
+class Octopus(Underwater, Predator):  # осьминог
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Underwater.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс осьминог')
 
 class Crane(Winged, Herbivorous):  # журавль
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str(), migratory=str()):
+        Winged.__init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal, migratory)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс журавль')
 
 class Pike(Underwater, Predator):  # щука
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Underwater.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Predator.__init__(self, food)
     def inf(self):
         print('вызвали класс щука')
 
 class Zebra(Ground, Herbivorous):  # зебра
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str()):
+        Ground.__init__(self, number, nickname, typeAnimal, predator,
+                        weight, dwells, climate, clasAnimal)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс зебра')
 
 class Pigeon(Winged, Herbivorous):  # голубь
+    def __init__(self, number=str(), nickname=str(), typeAnimal=str(), predator=str(),
+                 weight=float(), dwells=str(), climate=str(), clasAnimal=str(), food=str(), migratory=str()):
+        Winged.__init__(self, number, nickname, typeAnimal, predator,
+                 weight, dwells, climate, clasAnimal, migratory)
+        Herbivorous.__init__(self, food)
     def inf(self):
         print('вызвали класс голубь')
