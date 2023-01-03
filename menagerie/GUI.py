@@ -1,22 +1,16 @@
 import tkinter as tk
 from main import Button2_1, Button2_2, Button2_3, Button2_4, Button2_5
 
-class MainMenu(tk.Tk):  # главное меню
+class MainMenu:  # главное меню
     def __init__(self):
-        super().__init__()
-        # main = tk.Tk()
-        # main['bg'] = '#33ffe6'
-        # main.geometry(f'240x271+100+200')
-        self.button1 = tk.Button(text="1. add an animal", command=self.open_window1)
-        self.button2 = tk.Button(text="2. see animals", command=self.open_window2)
-        self.button3 = tk.Button(text="3. delete animal", command=self.open_window3)
-        self.button4 = tk.Button(text="4. exid", command=self.destroy)
-
-        self.button1.pack(pady=5, ipadx=2, ipady=2)
-        self.button2.pack(pady=5, ipadx=2, ipady=2)
-        self.button3.pack(pady=5, ipadx=2, ipady=2)
-        self.button4.pack(pady=5, ipadx=2, ipady=2)
-        # main.mainloop()
+        #super().__init__()
+        self.main = tk.Tk()
+        self.main['bg'] = '#33ffe6'
+        self.main.geometry(f'240x271+100+200')
+        tk.Button(self.main, text="1. add an animal", command=self.open_window1).pack(pady=5, ipadx=2, ipady=2)
+        tk.Button(self.main, text="2. see animals", command=self.open_window2).pack(pady=5, ipadx=2, ipady=2)
+        tk.Button(self.main, text="3. delete animal", command=self.open_window3).pack(pady=5, ipadx=2, ipady=2)
+        #tk.Button(self.main, text="4. exid", command=destroy).pack(pady=5, ipadx=2, ipady=2)
 
     def open_window1(self):
         addingAnimals = AddingAnimals(self)
@@ -27,8 +21,8 @@ class MainMenu(tk.Tk):  # главное меню
         seeAnimals.grab_set()
 
     def open_window3(self):
-        deleteAnimal = DeleteAnimal(self)
-        deleteAnimal.grab_set()
+        deleteAnimal = DeleteAnimal()
+        #deleteAnimal.grab_set()
 
 ############################################################################################################################################
 
@@ -36,7 +30,7 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
     def __init__(self, parent):
         super().__init__(parent)
         self.value = tk.BooleanVar()  # создали переменную и поместили в нее булевское значение, которое будет возвращать наш флажок
-        tk.Label(self, text="Выберите подвид животного:").pack()
+        tk.Label(self, text="Выберите подвид животного:", font=('Arial', 10)).pack()
         tk.Radiobutton(self, text="ground", variable=self.value, value=1, command=self.defines).pack()
         tk.Radiobutton(self, text="underwater", variable=self.value, value=2, command=self.defines).pack()
         tk.Radiobutton(self, text="winged", variable=self.value, value=3, command=self.defines).pack()
@@ -63,13 +57,13 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         tk.Radiobutton(self, text="no", variable=self.value, value=16, command=self.defines).pack()
 
         tk.Label(self, text="Какую пищу употребляет:").pack()
-        tk.Entry(self, font=('Arial',15)).pack()
+        tk.Entry(self, font=('Arial',10)).pack()
 
         tk.Label(self, text="Укажите вес животного:").pack()
-        tk.Entry(self, font=('Arial', 15)).pack()
+        tk.Entry(self, font=('Arial', 10)).pack()
 
         tk.Label(self, text="Придумайте кличку для нового жителя зоопарка:").pack()
-        tk.Entry(self, font=('Arial', 15)).pack()
+        tk.Entry(self, font=('Arial', 10)).pack()
 
         tk.Button(self, text="exit", command=self.destroy).pack()
         tk.Button(self, text="save", command=self.destroy).pack()
@@ -123,17 +117,17 @@ class SeeAnimals(tk.Toplevel):  # просмотр животных
 
 ##########################################################################################################################################
 
-class DeleteAnimal(tk.Toplevel):  # удалить животных
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.label = tk.Label(self, text="Это всплывающее окно 3")
-        self.button3_1 = tk.Button(self, text="6. Exit", command=self.destroy)
+class DeleteAnimal:  # удалить животных
+    def __init__(self):
+        self.trye = tk.Toplevel()
+        #self.trye.grab_set()
+        self.label = tk.Label(self.trye, text="Это всплывающее окно 3")
+        #self.button3_1 = tk.Button(self.trye, text="6. Exit", command=self.destroy)
 
         self.label.pack(padx=20, pady=20)
-        self.button3_1.pack(pady=5, ipadx=2, ipady=2)
+        #self.button3_1.pack(pady=5, ipadx=2, ipady=2)
 
 #########################################################################################################################################3
 
-if __name__ == "__main__":
-    mainMenu = MainMenu()
-    mainMenu.mainloop()
+mainMenu = MainMenu().main
+mainMenu.mainloop()
