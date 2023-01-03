@@ -35,11 +35,50 @@ class MainMenu(tk.Tk):  # главное меню
 class AddingAnimals(tk.Toplevel):  # добавить животное
     def __init__(self, parent):
         super().__init__(parent)
-        self.label = tk.Label(self, text="Это всплывающее окно 1")
-        self.button1_1 = tk.Button(self, text="6. Exit", command=self.destroy)
+        self.value = tk.BooleanVar()  # создали переменную и поместили в нее булевское значение, которое будет возвращать наш флажок
+        tk.Label(self, text="Выберите подвид животного:").pack()
+        tk.Radiobutton(self, text="ground", variable=self.value, value=1, command=self.defines).pack()
+        tk.Radiobutton(self, text="underwater", variable=self.value, value=2, command=self.defines).pack()
+        tk.Radiobutton(self, text="winged", variable=self.value, value=3, command=self.defines).pack()
 
-        self.label.pack(padx=20, pady=20)
-        self.button1_1.pack(pady=5, ipadx=2, ipady=2)
+        tk.Label(self, text="Укажите среду обитания данного подвида:").pack()
+        tk.Radiobutton(self, text="forests", variable=self.value, value=4, command=self.defines).pack()
+        tk.Radiobutton(self, text="mountains", variable=self.value, value=5, command=self.defines).pack()
+        tk.Radiobutton(self, text="steppes", variable=self.value, value=6, command=self.defines).pack()
+        tk.Radiobutton(self, text="rivers", variable=self.value, value=7, command=self.defines).pack()
+        tk.Radiobutton(self, text="seas", variable=self.value, value=8, command=self.defines).pack()
+        tk.Radiobutton(self, text="ocean", variable=self.value, value=9, command=self.defines).pack()
+
+        tk.Label(self, text="Являются ли миграционным:").pack()
+        tk.Radiobutton(self, text="yes", variable=self.value, value=10, command=self.defines).pack()
+        tk.Radiobutton(self, text="no", variable=self.value, value=11, command=self.defines).pack()
+
+        tk.Label(self, text="Укажите климатические условия:").pack()
+        tk.Radiobutton(self, text="warm", variable=self.value, value=12, command=self.defines).pack()
+        tk.Radiobutton(self, text="cold", variable=self.value, value=13, command=self.defines).pack()
+        tk.Radiobutton(self, text="moderate", variable=self.value, value=14, command=self.defines).pack()
+
+        tk.Label(self, text="Явлиется ли зверь хищником:").pack()
+        tk.Radiobutton(self, text="yes", variable=self.value, value=15, command=self.defines).pack()
+        tk.Radiobutton(self, text="no", variable=self.value, value=16, command=self.defines).pack()
+
+        tk.Label(self, text="Какую пищу употребляет:").pack()
+        tk.Entry(self, font=('Arial',15)).pack()
+
+        tk.Label(self, text="Укажите вес животного:").pack()
+        tk.Entry(self, font=('Arial', 15)).pack()
+
+        tk.Label(self, text="Придумайте кличку для нового жителя зоопарка:").pack()
+        tk.Entry(self, font=('Arial', 15)).pack()
+
+        tk.Button(self, text="exit", command=self.destroy).pack()
+        tk.Button(self, text="save", command=self.destroy).pack()
+
+        #self.button1_1.pack(pady=5, ipadx=2, ipady=2)
+
+    def defines(self):
+        value = self.value.get()
+        print(value)
 
 ##################################################################################################################################
 
