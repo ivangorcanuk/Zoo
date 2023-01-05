@@ -24,43 +24,46 @@ class MainMenu:  # главное меню
 
 class AddingAnimals:  # добавить животное
     def __init__(self):
-        self.addingAnimals = tk.Toplevel()
+        self.addingAnimals = tk.Tk()
         self.addingAnimals.grab_set()
-        #self.addingAnimals['bg'] = '#33ffe6'
+        # self.addingAnimals['bg'] = '#33ffe6'
         self.addingAnimals.geometry(f'500x700+500+50')
-        self.valueIntSubspecies = tk.IntVar()  # создали переменную и поместили в нее строковое значение, которое будет возвращать наш флажок подвид животного
-        self.valueIntHabitat = tk.IntVar()  # для среды обитания
-        self.valueIntClimate = tk.IntVar()  # для климатических условий
+        self.valueStrSubspecies = tk.StringVar()  # создали переменную и поместили в нее строковое значение, которое будет возвращать наш флажок подвид животного
+        self.valueStrSubspecies.set('gnd')
+        self.valueStrHabitat = tk.StringVar()  # для среды обитания
+        self.valueStrHabitat.set('ert')
+        self.valueStrClimate = tk.StringVar()  # для климатических условий
+        self.valueStrClimate.set('erte')
         self.valueBoolIsMigratory = tk.BooleanVar()  # создали переменную и поместили в нее булевское значение, которое будет возвращать наш флажок
         self.valueBoolIsPredator = tk.BooleanVar()
         tk.Label(self.addingAnimals, text="Выберите подвид животного:", font=('Arial', 13)).grid(row=0, columnspan=3)
-        tk.Radiobutton(self.addingAnimals, text="ground", font=('Arial', 13), variable=self.valueIntSubspecies, value=1, command=self.defineSubspecies).grid(row=1, column=0)
-        tk.Radiobutton(self.addingAnimals, text="underwater", font=('Arial', 13), variable=self.valueIntSubspecies, value=2, command=self.defineSubspecies).grid(row=1, column=1)
-        tk.Radiobutton(self.addingAnimals, text="winged", font=('Arial', 13), variable=self.valueIntSubspecies, value=3, command=self.defineSubspecies).grid(row=1, column=2)
+        tk.Radiobutton(self.addingAnimals, text="ground", font=('Arial', 13), variable=self.valueStrSubspecies, value="ground", command=self.defineSubspecies).grid(row=1, column=0)
+        tk.Radiobutton(self.addingAnimals, text="underwater", font=('Arial', 13), variable=self.valueStrSubspecies, value="underwater", command=self.defineSubspecies).grid(row=1, column=1)
+        tk.Radiobutton(self.addingAnimals, text="winged", font=('Arial', 13), variable=self.valueStrSubspecies, value="winged", command=self.defineSubspecies).grid(row=1, column=2)
 
         tk.Label(self.addingAnimals, text="Укажите среду обитания данного подвида:", font=('Arial', 13)).grid(row=2, columnspan=3)
-        tk.Radiobutton(self.addingAnimals, text="forests", font=('Arial', 13), variable=self.valueIntHabitat, value=1, command=self.definesHabitat).grid(row=3, column=0)
-        tk.Radiobutton(self.addingAnimals, text="mountains", font=('Arial', 13), variable=self.valueIntHabitat, value=2, command=self.definesHabitat).grid(row=4, column=0)
-        tk.Radiobutton(self.addingAnimals, text="steppes", font=('Arial', 13), variable=self.valueIntHabitat, value=3, command=self.definesHabitat).grid(row=3, column=1)
-        tk.Radiobutton(self.addingAnimals, text="rivers", font=('Arial', 13), variable=self.valueIntHabitat, value=4, command=self.definesHabitat).grid(row=4, column=1)
-        tk.Radiobutton(self.addingAnimals, text="seas", font=('Arial', 13), variable=self.valueIntHabitat, value=5, command=self.definesHabitat).grid(row=3, column=2)
-        tk.Radiobutton(self.addingAnimals, text="ocean", font=('Arial', 13), variable=self.valueIntHabitat, value=6, command=self.definesHabitat).grid(row=4, column=2)
+        tk.Radiobutton(self.addingAnimals, text="forests", font=('Arial', 13), variable=self.valueStrHabitat, value="forests", command=self.definesHabitat).grid(row=3, column=0)
+        tk.Radiobutton(self.addingAnimals, text="mountains", font=('Arial', 13), variable=self.valueStrHabitat, value="mountains", command=self.definesHabitat).grid(row=4, column=0)
+        tk.Radiobutton(self.addingAnimals, text="steppes", font=('Arial', 13), variable=self.valueStrHabitat, value="steppes", command=self.definesHabitat).grid(row=3, column=1)
+        tk.Radiobutton(self.addingAnimals, text="rivers", font=('Arial', 13), variable=self.valueStrHabitat, value="rivers", command=self.definesHabitat).grid(row=4, column=1)
+        tk.Radiobutton(self.addingAnimals, text="seas", font=('Arial', 13), variable=self.valueStrHabitat, value="seas", command=self.definesHabitat).grid(row=3, column=2)
+        tk.Radiobutton(self.addingAnimals, text="ocean", font=('Arial', 13), variable=self.valueStrHabitat, value="ocean", command=self.definesHabitat).grid(row=4, column=2)
 
         tk.Label(self.addingAnimals, text="Являются ли миграционным:", font=('Arial', 13)).grid(row=5, columnspan=3)
         tk.Radiobutton(self.addingAnimals, text="yes", font=('Arial', 13), variable=self.valueBoolIsMigratory, value=True, command=self.isMigratory).grid(row=6, column=0)
         tk.Radiobutton(self.addingAnimals, text="no", font=('Arial', 13), variable=self.valueBoolIsMigratory, value=False, command=self.isMigratory).grid(row=6, column=1)
 
         tk.Label(self.addingAnimals, text="Укажите климатические условия:", font=('Arial', 13)).grid(row=7, columnspan=3)
-        tk.Radiobutton(self.addingAnimals, text="warm", font=('Arial', 13), variable=self.valueIntClimate, value=1, command=self.definesClimate).grid(row=8, column=0)
-        tk.Radiobutton(self.addingAnimals, text="cold", font=('Arial', 13), variable=self.valueIntClimate, value=2, command=self.definesClimate).grid(row=8, column=1)
-        tk.Radiobutton(self.addingAnimals, text="moderate", font=('Arial', 13), variable=self.valueIntClimate, value=3, command=self.definesClimate).grid(row=8, column=2)
+        tk.Radiobutton(self.addingAnimals, text="warm", font=('Arial', 13), variable=self.valueStrClimate, value='warm', command=self.definesClimate).grid(row=8, column=0)
+        tk.Radiobutton(self.addingAnimals, text="cold", font=('Arial', 13), variable=self.valueStrClimate, value='cold', command=self.definesClimate).grid(row=8, column=1)
+        tk.Radiobutton(self.addingAnimals, text="moderate", font=('Arial', 13), variable=self.valueStrClimate, value='moderate', command=self.definesClimate).grid(row=8, column=2)
 
         tk.Label(self.addingAnimals, text="Явлиется ли зверь хищником:", font=('Arial', 13)).grid(row=9, columnspan=3)
         tk.Radiobutton(self.addingAnimals, text="yes", font=('Arial', 13), variable=self.valueBoolIsPredator, value=True, command=self.isPredator).grid(row=10, column=0)
         tk.Radiobutton(self.addingAnimals, text="no", font=('Arial', 13), variable=self.valueBoolIsPredator, value=False, command=self.isPredator).grid(row=10, column=1)
 
         tk.Label(self.addingAnimals, text="Какую пищу употребляет:", font=('Arial', 13)).grid(row=11, columnspan=3)
-        tk.Entry(self.addingAnimals, font=('Arial',10)).grid(row=12)
+        tk.Entry(self.addingAnimals, font=('Arial', 10)).grid(row=12)
 
         tk.Label(self.addingAnimals, text="Укажите вес животного:", font=('Arial', 13)).grid(row=13, columnspan=3)
         tk.Entry(self.addingAnimals, font=('Arial', 10)).grid(row=14)
@@ -72,38 +75,20 @@ class AddingAnimals:  # добавить животное
         tk.Button(self.addingAnimals, text="save", font=('Arial', 13), command=self.addingAnimals.destroy).grid(row=17, column=2)
 
     def defineSubspecies(self):  # определяет подвид животного
-        dictSubspecies = {
-                            1: 'ground',
-                            2: 'underwater',
-                            3: 'winged'
-                         }
-        value = self.valueIntSubspecies.get()
-        print(dictSubspecies[value])
+        value = self.valueStrSubspecies.get()
+        print(value)
 
     def definesHabitat(self):  # определяет среду обитания животного
-        dictHabitat = {
-                            1: 'forests',
-                            2: 'mountains',
-                            3: 'steppes',
-                            4: 'rivers',
-                            5: 'seas',
-                            6: 'ocean'
-                          }
-        value = self.valueIntHabitat.get()
-        print(dictHabitat[value])
+        value = self.valueStrHabitat.get()
+        print(value)
 
     def isMigratory(self):  # Явлиется ли зверь хищником
         value = self.valueBoolIsMigratory.get()
         print(value)
 
     def definesClimate(self):  # определяет климатические условия
-        dictClimate = {
-                        1: 'warm',
-                        2: 'cold',
-                        3: 'moderate'
-                      }
-        value = self.valueIntClimate.get()
-        print(dictClimate[value])
+        value = self.valueStrClimate.get()
+        print(value)
 
     def isPredator(self):  # Явлиется ли зверь хищником
         value = self.valueBoolIsPredator.get()
