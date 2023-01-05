@@ -74,16 +74,18 @@ class WorkingMethods:
                 listOb.append(animal)
         return listOb
 
-    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
-        for i in range(len(listAnimal)):
-            for j in range(i, len(listAnimal)):
-                if listAnimal[i] > listAnimal[j]:
-                    f = listAnimal[j]
-                    listAnimal[j] = listAnimal[i]
-                    listAnimal[i] = f
-            print(listAnimal[i].nickname, listAnimal[i].clasAnimal, listAnimal[i].weight)
-            if i == 2:
-                break
+    def view_lungs_animal(self, text, listAnimal):  # топ 3 самых легких существа зоопарка
+        for i in range(7):
+            text.insert('end', f'{listAnimal[i].nickname}\n')
+        # for i in range(len(listAnimal)):
+        #     for j in range(i, len(listAnimal)):
+        #         if listAnimal[i] > listAnimal[j]:
+        #             f = listAnimal[j]
+        #             listAnimal[j] = listAnimal[i]
+        #             listAnimal[i] = f
+        #     print(listAnimal[i].nickname + ' ' + listAnimal[i].clasAnimal + ' ' + str(listAnimal[i].weight))
+        #     if i == 2:
+        #         break
 
     def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
         for i in range(len(listPredator)):
