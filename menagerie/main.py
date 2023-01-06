@@ -23,11 +23,11 @@ class Button2_1:  # топ 3 самых легких существа зоопа
         self.window2_1.grab_set()
         self.window2_1['bg'] = '#33ffe6'
         self.window2_1.geometry(f'500x500+500+50')
-        tk.Label(self.window2_1, text="топ 3 самых легких существа зоопарка", font=('Arial', 13)).pack()
-        self.text = tk.Text(self.window2_1, width=20, height=20, font=('Arial', 13), bg='blue')
-        self.text.place(x=50, y=30)
+        tk.Label(self.window2_1, text="топ 3 самых легких существа зоопарка", font=('Arial', 13)).pack(anchor='n')
+        self.text = tk.Text(self.window2_1, font=('Arial', 13), bg='blue')
+        self.text.place(x=60, y=60, width=300, height=100)
         WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)
-        self.button2_1 = tk.Button(self.window2_1, text="1. Exid", font=('Arial', 13), command=self.window2_1.destroy).pack()
+        self.button2_1 = tk.Button(self.window2_1, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_1.destroy).pack(expand=True)
 
 class Button2_2:  # топ 5 самых больших хищников
     def __init__(self):
