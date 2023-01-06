@@ -26,47 +26,55 @@ class Button2_1:  # топ 3 самых легких существа зоопа
         tk.Label(self.window2_1, text="топ 3 самых легких существа зоопарка", font=('Arial', 13)).pack(anchor='n')
         self.text = tk.Text(self.window2_1, font=('Arial', 13), bg='blue')
         self.text.place(x=60, y=60, width=300, height=100)
-        WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)
-        self.button2_1 = tk.Button(self.window2_1, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_1.destroy).pack(expand=True)
+        WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)  # вызывали метод из файла WorkingMethods
+        tk.Button(self.window2_1, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_1.destroy).pack(expand=True)
 
 class Button2_2:  # топ 5 самых больших хищников
     def __init__(self):
         self.window2_2 = tk.Toplevel()
         self.window2_2.grab_set()
-        self.label2_2 = tk.Label(self.window2_2, text="топ 5 самых больших хищников", font=('Arial', 13))
-        self.button2_2 = tk.Button(self.window2_2, text="1. Exid", font=('Arial', 13), command=self.window2_2.destroy)
-
-        self.label2_2.pack(padx=20, pady=20)
-        self.button2_2.pack(pady=5, ipadx=2, ipady=2)
+        self.window2_2['bg'] = '#33ffe6'
+        self.window2_2.geometry(f'500x500+500+50')
+        tk.Label(self.window2_2, text="топ 5 самых больших хищников", font=('Arial', 13)).pack(anchor='n')
+        self.text = tk.Text(self.window2_2, font=('Arial', 13), bg='blue')
+        self.text.place(x=60, y=60, width=300, height=100)
+        WorkingMethods().viewing_large_animal(self.text, Data().listPredator)  # вызывали метод из файла WorkingMethods
+        tk.Button(self.window2_2, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_2.destroy).pack(expand=True)
 
 class Button2_3:  # сипсок имен травоядных существ
     def __init__(self):
         self.window2_3 = tk.Toplevel()
         self.window2_3.grab_set()
-        self.label2_3 = tk.Label(self.window2_3, text="сипсок имен травоядных существ", font=('Arial', 13))
-        self.button2_3 = tk.Button(self.window2_3, text="1. Exid", font=('Arial', 13), command=self.window2_3.destroy)
+        self.window2_3['bg'] = '#33ffe6'
+        self.window2_3.geometry(f'500x500+500+50')
+        tk.Label(self.window2_3, text="сипсок имен травоядных существ", font=('Arial', 13)).pack(anchor='n')
+        self.text = tk.Text(self.window2_3, font=('Arial', 13), bg='blue')
+        self.text.place(x=60, y=60, width=300, height=100)
+        WorkingMethods().viewing_name_herbivorous(self.text, Data().listHerbivorous)
+        tk.Button(self.window2_3, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_3.destroy).pack(expand=True)
 
-        self.label2_3.pack(padx=20, pady=20)
-        self.button2_3.pack(pady=5, ipadx=2, ipady=2)
-
-class Button2_4:  # список подводных существ по мере убывания их веса\
+class Button2_4:  # список подводных существ по мере убывания их веса
     def __init__(self):
         self.window2_4 = tk.Toplevel()
         self.window2_4.grab_set()
-        self.label2_4 = tk.Label(self.window2_4, text="список подводных существ по мере убывания их веса", font=('Arial', 13))
-        self.button2_4 = tk.Button(self.window2_4, text="1. Exid", font=('Arial', 13), command=self.window2_4.destroy)
-
-        self.label2_4.pack(padx=20, pady=20)
-        self.button2_4.pack(pady=5, ipadx=2, ipady=2)
+        self.window2_4['bg'] = '#33ffe6'
+        self.window2_4.geometry(f'500x500+500+50')
+        tk.Label(self.window2_4, text="список подводных существ по мере убывания их веса", font=('Arial', 13)).pack(anchor='n')
+        self.text = tk.Text(self.window2_4, font=('Arial', 13), bg='blue')
+        self.text.place(x=60, y=60, width=300, height=100)
+        WorkingMethods().view_descending_weight(self.text, Data().listUnderwater)
+        tk.Button(self.window2_4, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_4.destroy).pack(expand=True)
 
 class Button2_5:  # список наземных животных с именем каджого и местом обитания
     def __init__(self):
         self.window2_5 = tk.Toplevel()
         self.window2_5.grab_set()
-        self.label2_5 = tk.Label(self.window2_5, text="список наземных животных с именем каджого и местом обитания", font=('Arial', 13))
-        self.button2_5 = tk.Button(self.window2_5, text="1. Exid", font=('Arial', 13), command=self.window2_5.destroy)
-
-        self.label2_5.pack(padx=20, pady=20)
-        self.button2_5.pack(pady=5, ipadx=2, ipady=2)
+        self.window2_5['bg'] = '#33ffe6'
+        self.window2_5.geometry(f'500x500+500+50')
+        tk.Label(self.window2_5, text="список подводных существ по мере убывания их веса", font=('Arial', 13)).pack(anchor='n')
+        self.text = tk.Text(self.window2_5, font=('Arial', 13), bg='blue')
+        self.text.place(x=60, y=60, width=300, height=100)
+        WorkingMethods().viewing_habitats(self.text, Data().listGround)
+        tk.Button(self.window2_5, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_5.destroy).pack(expand=True)
 
 """Удаление животных"""
