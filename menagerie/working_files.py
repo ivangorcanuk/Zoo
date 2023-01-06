@@ -75,45 +75,48 @@ class WorkingMethods:
         return listOb
 
     def view_lungs_animal(self, text, listAnimal):  # топ 3 самых легких существа зоопарка
-        for i in range(7):
-            text.insert('end', f'{listAnimal[i].nickname}\n')
-        # for i in range(len(listAnimal)):
-        #     for j in range(i, len(listAnimal)):
-        #         if listAnimal[i] > listAnimal[j]:
-        #             f = listAnimal[j]
-        #             listAnimal[j] = listAnimal[i]
-        #             listAnimal[i] = f
-        #     print(listAnimal[i].nickname + ' ' + listAnimal[i].clasAnimal + ' ' + str(listAnimal[i].weight))
-        #     if i == 2:
-        #         break
+        for i in range(len(listAnimal)):
+            for j in range(i, len(listAnimal)):
+                if listAnimal[i] > listAnimal[j]:
+                    f = listAnimal[j]
+                    listAnimal[j] = listAnimal[i]
+                    listAnimal[i] = f
+            stroka = listAnimal[i].nickname + ' ' + listAnimal[i].clasAnimal + ' ' + str(listAnimal[i].weight) + ' кг'
+            text.insert('end', f'{stroka}\n')  # выводим строку
+            if i == 2:
+                break
 
-    def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
+    def viewing_large_animal(self, text, listPredator):  # топ 5 самых больших хищников
         for i in range(len(listPredator)):
             for j in range(i, len(listPredator)):
                 if listPredator[i] < listPredator[j]:
                     f = listPredator[j]
                     listPredator[j] = listPredator[i]
                     listPredator[i] = f
-            print(listPredator[i].nickname, listPredator[i].clasAnimal, listPredator[i].weight)
+            stroka = listPredator[i].nickname + ' ' + listPredator[i].clasAnimal + ' ' + str(listPredator[i].weight) + ' кг'
+            text.insert('end', f'{stroka}\n')
             if i == 4:
                 break
 
-    def viewing_name_herbivorous(self, listHerbivorous):  # просмотр кличек травоядных существ
+    def viewing_name_herbivorous(self, text, listHerbivorous):  # просмотр кличек травоядных существ
         for herbivorous in listHerbivorous:
-            print(herbivorous.nickname, herbivorous.clasAnimal)
+            stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
+            text.insert('end', f'{stroka}\n')
 
-    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+    def view_descending_weight(self, text, listUnderwater):  # просмотр подводных существ по мере убывания их веса
         for i in range(len(listUnderwater)):
             for j in range(i, len(listUnderwater)):
                 if listUnderwater[i] < listUnderwater[j]:
                     f = listUnderwater[j]
                     listUnderwater[j] = listUnderwater[i]
                     listUnderwater[i] = f
-            print(listUnderwater[i].nickname, listUnderwater[i].clasAnimal, listUnderwater[i].weight)
+            stroka = listUnderwater[i].nickname + ' ' + listUnderwater[i].clasAnimal + ' ' + str(listUnderwater[i].weight) + ' кг'
+            text.insert('end', f'{stroka}\n')
 
-    def viewing_habitats(self, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
+    def viewing_habitats(self, text, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
         for ground in listGround:
-            print(ground.nickname, ground.clasAnimal, ground.dwells)
+            stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + ground.dwells + ' кг'
+            text.insert('end', f'{stroka}\n')
 
     def number_assignment(self, listAnimal):  # присвоение уникального номера животному
         for animal in listAnimal:
