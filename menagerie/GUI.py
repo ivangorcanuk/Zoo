@@ -6,10 +6,11 @@ class MainMenu:  # главное меню
         self.main = tk.Tk()
         self.main['bg'] = '#33ffe6'
         self.main.geometry(f'240x271+100+200')
-        tk.Button(self.main, text="1. add an animal", font=('Arial', 13), command=self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="2. see animals", font=('Arial', 13), command=self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="3. delete animal", font=('Arial', 13), command=self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="4. exid", font=('Arial', 13), command=self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
+        self.main.title('Zoo')
+        tk.Button(self.main, text="Add an animal", font=('Arial', 13), command=self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
+        tk.Button(self.main, text="See animals", font=('Arial', 13), command=self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
+        tk.Button(self.main, text="Delete animal", font=('Arial', 13), command=self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
+        tk.Button(self.main, text="Exid", font=('Arial', 13), command=self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
 
     def open_window1(self):
         addingAnimals = AddingAnimals()
@@ -26,8 +27,9 @@ class AddingAnimals:  # добавить животное
     def __init__(self):
         self.addingAnimals = tk.Tk()
         self.addingAnimals.grab_set()
+        self.addingAnimals.title('Adding animals')
         # self.addingAnimals['bg'] = '#33ffe6'
-        self.addingAnimals.geometry(f'500x700+500+50')
+        self.addingAnimals.geometry(f'500x600+500+50')
         self.valueStrSubspecies = tk.StringVar()  # создали переменную и поместили в нее строковое значение, которое будет возвращать наш флажок подвид животного
         self.valueStrSubspecies.set('gnd')
         self.valueStrHabitat = tk.StringVar()  # для среды обитания
@@ -36,7 +38,7 @@ class AddingAnimals:  # добавить животное
         self.valueStrClimate.set('erte')
         self.valueBoolIsMigratory = tk.BooleanVar()  # создали переменную и поместили в нее булевское значение, которое будет возвращать наш флажок
         self.valueBoolIsPredator = tk.BooleanVar()
-        tk.Label(self.addingAnimals, text="Выберите подвид животного:", font=('Arial', 13)).grid(row=0, columnspan=3)
+        tk.Label(self.addingAnimals, text="Выберите подвид животного:", font=('Arial', 13)).grid(row=0, columnspan=3, )
         tk.Radiobutton(self.addingAnimals, text="ground", font=('Arial', 13), variable=self.valueStrSubspecies, value="ground", command=self.defineSubspecies).grid(row=1, column=0)
         tk.Radiobutton(self.addingAnimals, text="underwater", font=('Arial', 13), variable=self.valueStrSubspecies, value="underwater", command=self.defineSubspecies).grid(row=1, column=1)
         tk.Radiobutton(self.addingAnimals, text="winged", font=('Arial', 13), variable=self.valueStrSubspecies, value="winged", command=self.defineSubspecies).grid(row=1, column=2)
@@ -101,14 +103,14 @@ class SeeAnimals:  # просмотр животных
         self.seeAnimals = tk.Toplevel()
         self.seeAnimals.grab_set()
         self.seeAnimals['bg'] = '#33ffe6'
-        self.seeAnimals.geometry(f'500x700+500+50')
-        self.label = tk.Label(self.seeAnimals, text="Это всплывающее окно 2").grid(row=0)
-        tk.Button(self.seeAnimals, text="1. Top 3 Lightest Zoo Creatures", font=('Arial', 13), command=self.open_window2_1).grid(row=1)
-        tk.Button(self.seeAnimals, text="2. Top 5 biggest predators", font=('Arial', 13), command=self.open_window2_2).grid(row=2)
-        tk.Button(self.seeAnimals, text="3. List of herbivore names", font=('Arial', 13), command=self.open_window2_3).grid(row=3)
-        tk.Button(self.seeAnimals, text="4. List of underwater creatures in decreasing order of their weight", font=('Arial', 13), command=self.open_window2_4).grid(row=4)
-        tk.Button(self.seeAnimals, text="5. List of land animals, with each name and location", font=('Arial', 13), command=self.open_window2_5).grid(row=5)
-        tk.Button(self.seeAnimals, text="6. Exit", font=('Arial', 13), command=self.seeAnimals.destroy).grid(row=6)
+        self.seeAnimals.geometry(f'550x300+500+50')
+        self.seeAnimals.title('See animals')
+        tk.Button(self.seeAnimals, text="Top 3 Lightest Zoo Creatures", font=('Arial', 13), command=self.open_window2_1).grid(row=1, padx=30, pady=2)
+        tk.Button(self.seeAnimals, text="Top 5 biggest predators", font=('Arial', 13), command=self.open_window2_2).grid(row=2, padx=30, pady=2)
+        tk.Button(self.seeAnimals, text="List of herbivore names", font=('Arial', 13), command=self.open_window2_3).grid(row=3, padx=30, pady=2)
+        tk.Button(self.seeAnimals, text="List of underwater creatures in decreasing order of their weight", font=('Arial', 13), command=self.open_window2_4).grid(row=4, padx=30, pady=2)
+        tk.Button(self.seeAnimals, text="List of land animals, with each name and location", font=('Arial', 13), command=self.open_window2_5).grid(row=5, padx=30, pady=2)
+        tk.Button(self.seeAnimals, text="Exit", font=('Arial', 13), command=self.seeAnimals.destroy).grid(row=6, padx=30, pady=2)
 
     def open_window2_1(self):
         button2_1 = Button2_1()
