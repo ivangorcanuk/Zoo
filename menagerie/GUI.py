@@ -1,5 +1,5 @@
 import tkinter as tk
-from main import Button2_1, Button2_2, Button2_3, Button2_4, Button2_5
+from main import SeeAnimals
 
 class MainMenu:  # главное меню
     def __init__(self):
@@ -7,10 +7,14 @@ class MainMenu:  # главное меню
         self.main['bg'] = '#33ffe6'
         self.main.geometry(f'240x271+100+200')
         self.main.title('Zoo')
-        tk.Button(self.main, text="Add an animal", font=('Arial', 13), command=self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="See animals", font=('Arial', 13), command=self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="Delete animal", font=('Arial', 13), command=self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
-        tk.Button(self.main, text="Exid", font=('Arial', 13), command=self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
+
+        self.button('Add an animal', self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
+        self.button('See animals', self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
+        self.button('Delete animal', self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
+        self.button('Exid', self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
+
+    def button(self, text, command):
+        return tk.Button(self.main, text=text, font=('Arial', 13), command=command)
 
     def open_window1(self):
         addingAnimals = AddingAnimals()
@@ -30,16 +34,11 @@ class AddingAnimals:  # добавить животное
         self.addingAnimals.title('Adding animals')
         # self.addingAnimals['bg'] = '#33ffe6'
         self.addingAnimals.geometry(f'500x600+500+50')
-        self.valueStrSubspecies = tk.StringVar()  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
-        self.valueStrSubspecies.set('esth')
-        self.valueStrHabitat = tk.StringVar()  # аналогично для среды обитания
-        self.valueStrHabitat.set('est')
-        self.valueStrClimate = tk.StringVar()  # для климатических условий
-        self.valueStrClimate.set('es')
-        self.valueBoolIsMigratory = tk.StringVar()  # создали переменную с числовым значением - миграция
-        self.valueBoolIsMigratory.set('2')
-        self.valueBoolIsPredator = tk.StringVar()  # создали переменную с числовым значением - хищник
-        self.valueBoolIsPredator.set('1')
+        self.valueStrSubspecies = tk.StringVar(self.addingAnimals, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
+        self.valueStrHabitat = tk.StringVar(self.addingAnimals, 'est')  # аналогично для среды обитания
+        self.valueStrClimate = tk.StringVar(self.addingAnimals, 'es')  # для климатических условий
+        self.valueBoolIsMigratory = tk.StringVar(self.addingAnimals, '1')  # создали переменную с числовым значением - миграция
+        self.valueBoolIsPredator = tk.StringVar(self.addingAnimals, '2')  # создали переменную с числовым значением - хищник
         self.value_food = tk.StringVar()  # создали переменную для пищи животного
         self.value_weight = tk.StringVar()  # создали переменную для веса животного
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
@@ -79,8 +78,8 @@ class AddingAnimals:  # добавить животное
         self.label('Придумайте кличку для нового жителя зоопарка:').grid(row=15, columnspan=3)
         self.entry(self.value_nickname).grid(row=16)
 
-        tk.Button(self.addingAnimals, text="exit", font=('Arial', 13), command=self.addingAnimals.destroy).grid(row=17, column=0)
-        tk.Button(self.addingAnimals, text="save", font=('Arial', 13), command=self.save).grid(row=17, column=2)
+        self.button('exit', self.addingAnimals.destroy).grid(row=17, column=0)
+        self.button('save', self.save).grid(row=17, column=2)
 
     def radiobutton(self, value, variable):
         return tk.Radiobutton(self.addingAnimals, text=value, font=('Arial', 13), variable=variable, value=value)
@@ -90,6 +89,9 @@ class AddingAnimals:  # добавить животное
 
     def entry(self, variable):
         return tk.Entry(self.addingAnimals, font=('Arial', 10), textvariable=variable)
+
+    def button(self, text, command):
+        return tk.Button(self.addingAnimals, text=text, font=('Arial', 13), command=command)
 
     def save(self):
         subspecies_value = self.valueStrSubspecies.get()
@@ -104,34 +106,51 @@ class AddingAnimals:  # добавить животное
 
 ##################################################################################################################################
 
-class SeeAnimals:  # просмотр животных
-    def __init__(self):
-        self.seeAnimals = tk.Toplevel()
-        self.seeAnimals.grab_set()
-        self.seeAnimals['bg'] = '#33ffe6'
-        self.seeAnimals.geometry(f'550x300+500+50')
-        self.seeAnimals.title('See animals')
-        tk.Button(self.seeAnimals, text="Top 3 Lightest Zoo Creatures", font=('Arial', 13), command=self.open_window2_1).grid(row=1, padx=30, pady=2)
-        tk.Button(self.seeAnimals, text="Top 5 biggest predators", font=('Arial', 13), command=self.open_window2_2).grid(row=2, padx=30, pady=2)
-        tk.Button(self.seeAnimals, text="List of herbivore names", font=('Arial', 13), command=self.open_window2_3).grid(row=3, padx=30, pady=2)
-        tk.Button(self.seeAnimals, text="List of underwater creatures in decreasing order of their weight", font=('Arial', 13), command=self.open_window2_4).grid(row=4, padx=30, pady=2)
-        tk.Button(self.seeAnimals, text="List of land animals, with each name and location", font=('Arial', 13), command=self.open_window2_5).grid(row=5, padx=30, pady=2)
-        tk.Button(self.seeAnimals, text="Exit", font=('Arial', 13), command=self.seeAnimals.destroy).grid(row=6, padx=30, pady=2)
-
-    def open_window2_1(self):
-        button2_1 = Button2_1()
-
-    def open_window2_2(self):
-        button2_2 = Button2_2()
-
-    def open_window2_3(self):
-        button2_3 = Button2_3()
-
-    def open_window2_4(self):
-        button2_4 = Button2_4()
-
-    def open_window2_5(self):
-        button2_5 = Button2_5()
+# class SeeAnimals:  # просмотр животных
+#     def __init__(self):
+#         self.seeAnimals = tk.Toplevel()
+#         self.seeAnimals.grab_set()
+#         self.seeAnimals['bg'] = '#33ffe6'
+#         self.seeAnimals.geometry(f'550x300+500+50')
+#         self.seeAnimals.title('See animals')
+#
+#         self.button('Top 3 Lightest Zoo Creatures', self.open_window2_1).grid(row=1, padx=30, pady=2)
+#         self.button('Top 5 biggest predators', self.open_window2_2).grid(row=2, padx=30, pady=2)
+#         self.button('List of herbivore names', self.open_window2_3).grid(row=3, padx=30, pady=2)
+#         self.button('List of underwater creatures in decreasing order of their weight', self.open_window2_4).grid(row=4, padx=30, pady=2)
+#         self.button('List of land animals, with each name and location', self.open_window2_5).grid(row=5, padx=30, pady=2)
+#         self.button('Exit', self.seeAnimals.destroy).grid(row=6, padx=30, pady=2)
+#
+#     def button(self, text, command):
+#         return tk.Button(self.seeAnimals, text=text, font=('Arial', 13), command=command)
+#
+#     def label(self, text):
+#         return tk.Label(self.seeAnimals, text=text, font=('Arial', 13))
+#
+#     def text(self):
+#         return tk.Text(self.seeAnimals, font=('Arial', 13), bg='blue')
+#
+#     def open_window(self):
+#         self.label('топ 3 самых легких существа зоопарка').pack(anchor='n')
+#         self.text().place(x=60, y=60, width=300, height=100)
+#         WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)  # вызывали метод из файла WorkingMethods
+#         tk.Button(self.window2_1, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_1.destroy).pack(
+#             expand=True)
+#
+#     def open_window2_1(self):
+#         button2_1 = Button2_1()
+#
+#     def open_window2_2(self):
+#         button2_2 = Button2_2()
+#
+#     def open_window2_3(self):
+#         button2_3 = Button2_3()
+#
+#     def open_window2_4(self):
+#         button2_4 = Button2_4()
+#
+#     def open_window2_5(self):
+#         button2_5 = Button2_5()
 
 ##########################################################################################################################################
 
