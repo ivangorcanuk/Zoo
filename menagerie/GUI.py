@@ -1,5 +1,5 @@
 import tkinter as tk
-from main import SeeAnimals
+from main import AnimalRatings, SeeAnimals
 
 class MainMenu:  # главное меню
     def __init__(self):
@@ -9,8 +9,8 @@ class MainMenu:  # главное меню
         self.main.title('Zoo')
 
         self.button('Add an animal', self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
-        self.button('See animals', self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
-        self.button('Delete animal', self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
+        self.button('Animal Ratings', self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
+        self.button('See Animals', self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
         self.button('Exid', self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
 
     def button(self, text, command):
@@ -20,10 +20,10 @@ class MainMenu:  # главное меню
         addingAnimals = AddingAnimals()
 
     def open_window2(self):
-        seeAnimals = SeeAnimals()
+        seeAnimals = AnimalRatings()
 
     def open_window3(self):
-        deleteAnimal = DeleteAnimal()
+        deleteAnimal = SeeAnimals()
 
 ############################################################################################################################################
 
@@ -32,7 +32,7 @@ class AddingAnimals:  # добавить животное
         self.addingAnimals = tk.Toplevel()
         self.addingAnimals.grab_set()
         self.addingAnimals.title('Adding animals')
-        # self.addingAnimals['bg'] = '#33ffe6'
+        self.addingAnimals['bg'] = '#33ffe6'
         self.addingAnimals.geometry(f'500x600+500+50')
         self.valueStrSubspecies = tk.StringVar(self.addingAnimals, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
         self.valueStrHabitat = tk.StringVar(self.addingAnimals, 'est')  # аналогично для среды обитания
@@ -69,14 +69,14 @@ class AddingAnimals:  # добавить животное
         self.radiobutton('yes', self.valueBoolIsPredator).grid(row=10, column=0)
         self.radiobutton('no', self.valueBoolIsPredator).grid(row=10, column=1)
 
-        self.label('Какую пищу употребляет:').grid(row=11, columnspan=3)
-        self.entry(self.value_food).grid(row=12)
+        self.label('Какую пищу употребляет:').grid(row=11, column=0)
+        self.entry(self.value_food).grid(row=11, column=1)
 
-        self.label('Укажите вес животного:').grid(row=13, columnspan=3)
-        self.entry(self.value_weight).grid(row=14)
+        self.label('Укажите вес животного:').grid(row=12, column=0)
+        self.entry(self.value_weight).grid(row=12, column=1)
 
-        self.label('Придумайте кличку для нового жителя зоопарка:').grid(row=15, columnspan=3)
-        self.entry(self.value_nickname).grid(row=16)
+        self.label('Придумайте кличку \n для нового жителя зоопарка:').grid(row=13, column=0)
+        self.entry(self.value_nickname).grid(row=13, column=1)
 
         self.button('exit', self.addingAnimals.destroy).grid(row=17, column=0)
         self.button('save', self.save).grid(row=17, column=2)
@@ -154,17 +154,21 @@ class AddingAnimals:  # добавить животное
 
 ##########################################################################################################################################
 
-class DeleteAnimal:  # удалить животных
-    def __init__(self):
-        self.deleteAnimal = tk.Toplevel()
-        self.deleteAnimal.grab_set()
-        self.deleteAnimal['bg'] = '#33ffe6'
-        self.deleteAnimal.geometry(f'240x271+100+200')
-        self.label = tk.Label(self.deleteAnimal, text="Это всплывающее окно 3")
-        self.button3_1 = tk.Button(self.deleteAnimal, text="6. Exit", command=self.deleteAnimal.destroy)
+# class DeleteAnimal:  # удалить животных
+#     def __init__(self):
+#         self.deleteAnimal = tk.Toplevel()
+#         self.deleteAnimal.grab_set()
+#         self.deleteAnimal['bg'] = '#33ffe6'
+#         self.deleteAnimal.geometry(f'550x500+500+50')
+#         self.deleteAnimal.title('DeleteAnimal')
+#         self.animal = tk.StringVar()  # создали переменную для выбора животного
+#
+#         tk.Label(self.deleteAnimal, text='Enter the name of the animal', font=('Arial', 13)).pack()
+#         tk.Entry(self.deleteAnimal, font=('Arial', 10), textvariable=self.animal).pack()
+#         tk.Button(self.deleteAnimal, text='exit', font=('Arial', 13), command=self.deleteAnimal.destroy)
+#         self.text = tk.Text(self.deleteAnimal, font=('Arial', 13), bg='#33ffe6')
+#         self.text.place(x=120, y=270, width=300, height=100)
 
-        self.label.pack(padx=20, pady=20)
-        self.button3_1.pack(pady=5, ipadx=2, ipady=2)
 
 #########################################################################################################################################3
 
