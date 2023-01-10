@@ -2,7 +2,6 @@ import tkinter as tk
 from working_files import WorkingMethods, WorkingFiles
 
 """Данные"""
-
 class Data:
     def __init__(self):
         self.listAnimal = WorkingFiles().reading()  # создаем основной список с животными зоопарка
@@ -16,50 +15,67 @@ class Data:
 """Добавление животного"""
 
 """Просмотр животных"""
-
-
-class SeeAnimals:  # просмотр животных
+class AnimalRatings:  # просмотр животных
     def __init__(self):
-        self.seeAnimals = tk.Toplevel()
-        self.seeAnimals.grab_set()
-        self.seeAnimals['bg'] = '#33ffe6'
-        self.seeAnimals.geometry(f'550x500+500+50')
-        self.seeAnimals.title('See animals')
+        self.animalRatings = tk.Toplevel()
+        self.animalRatings.grab_set()
+        self.animalRatings['bg'] = '#33ffe6'
+        self.animalRatings.geometry(f'550x500+500+50')
+        self.animalRatings.title('Animal Ratings')
+        self.ark = 0
 
-        self.button('Top 3 Lightest Zoo Creatures', self.open_window, 1).grid(row=1, column=0, padx=30, pady=2)
-        self.button('Top 5 biggest predators', self.open_window, 2).grid(row=2, column=0, padx=30, pady=2)
-        self.button('List of herbivore names', self.open_window, 3).grid(row=3, column=0, padx=30, pady=2)
-        self.button('List of underwater creatures in decreasing order of their weight', self.open_window, 4).grid(row=4, column=0, padx=30, pady=2)
-        self.button('List of land animals, with each name and location', self.open_window, 5).grid(row=5, column=0, padx=30, pady=2)
-        self.button('Exit', self.seeAnimals.destroy, 6).grid(row=6, column=0, padx=30, pady=2)
+        tk.Button(self.animalRatings, text='Top 3 Lightest Zoo Creatures', font=('Arial', 13), command=lambda: self.open_window(1)).grid(row=1, column=0, padx=30, pady=2)
+        tk.Button(self.animalRatings, text='Top 5 biggest predators', font=('Arial', 13), command=lambda: self.open_window2(2)).grid(row=2, column=0, padx=30, pady=2)
+        tk.Button(self.animalRatings, text='List of herbivore names', font=('Arial', 13), command=lambda: self.open_window3(3)).grid(row=3, column=0, padx=30, pady=2)
+        tk.Button(self.animalRatings, text='List of underwater creatures in decreasing order of their weight', font=('Arial', 13), command=lambda: self.open_window4(4)).grid(row=4, column=0, padx=30, pady=2)
+        tk.Button(self.animalRatings, text='List of land animals, with each name and location', font=('Arial', 13), command=lambda: self.open_window5(5)).grid(row=5, column=0, padx=30, pady=2)
+        self.button('Exit', self.animalRatings.destroy).grid(row=6, column=0, padx=30, pady=2)
 
-    def button(self, text, command, wagrw):
-        self.value_button = wagrw
-        return tk.Button(self.seeAnimals, text=text, font=('Arial', 13), command=command)
-
-    def label(self, text):
-        return tk.Label(self.seeAnimals, text=text, font=('Arial', 13))
+    def button(self, text, command):
+        return tk.Button(self.animalRatings, text=text, font=('Arial', 13), command=command)
 
     def text(self):
-        return tk.Text(self.seeAnimals, font=('Arial', 13), bg='#33ffe6')
+        return tk.Text(self.animalRatings, font=('Arial', 13), bg='#33ffe6')
 
-    def open_window(self):
-        self.label('Top 3 Lightest Zoo Creatures').grid(row=7, column=0, padx=30, pady=2)
-        self.text1 = self.text()
-        self.text1.place(x=120, y=270, width=300, height=100)
-        print('re')
-        if self.value_button == 1:
-            print('rr')
-            WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)  # вызывали метод из файла WorkingMethods
-        elif self.value_button == 2:
-            WorkingMethods().viewing_large_animal(self.text, Data().listPredator)
-        elif self.value_button == 3:
-            WorkingMethods().viewing_name_herbivorous(self.text, Data().listHerbivorous)
-        elif self.value_button == 4:
-            WorkingMethods().view_descending_weight(self.text, Data().listUnderwater)
-        elif self.value_button == 5:
-            WorkingMethods().viewing_habitats(self.text, Data().listGround)
+    def open_window(self, ark):
+        self.text = self.text()
+        self.text.place(x=120, y=270, width=300, height=100)
+        WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)  # вызывали метод из файла WorkingMethods
+        # if ark == 1:
+        #     print('11')
+        #     WorkingMethods().view_lungs_animal(self.text, Data().listAnimal)  # вызывали метод из файла WorkingMethods
+        # elif ark == 2:
+        #     print('22')
+        #     WorkingMethods().viewing_large_animal(self.text, Data().listPredator)
+        # elif ark == 3:
+        #     print('33')
+        #     WorkingMethods().viewing_name_herbivorous(self.text, Data().listHerbivorous)
+        # elif ark == 4:
+        #     print('44')
+        #     WorkingMethods().view_descending_weight(self.text, Data().listUnderwater)
+        # elif ark == 5:
+        #     print('55')
+        #     WorkingMethods().viewing_habitats(self.text, Data().listGround)
 
+    def open_window2(self, ark):
+        self.text = self.text()
+        self.text.place(x=120, y=270, width=300, height=100)
+        WorkingMethods().viewing_large_animal(self.text, Data().listPredator)
+
+    def open_window3(self, ark):
+        self.text = self.text()
+        self.text.place(x=120, y=270, width=300, height=100)
+        WorkingMethods().viewing_name_herbivorous(self.text, Data().listHerbivorous)
+
+    def open_window4(self, ark):
+        self.text = self.text()
+        self.text.place(x=120, y=270, width=300, height=100)
+        WorkingMethods().view_descending_weight(self.text, Data().listUnderwater)
+
+    def open_window5(self, ark):
+        self.text = self.text()
+        self.text.place(x=120, y=270, width=300, height=100)
+        WorkingMethods().viewing_habitats(self.text, Data().listGround)
 # class Button2_1:  # топ 3 самых легких существа зоопарка
 #     def __init__(self):
 #         self.window2_1 = tk.Toplevel()
@@ -119,5 +135,20 @@ class SeeAnimals:  # просмотр животных
 #         self.text.place(x=60, y=60, width=300, height=100)
 #         WorkingMethods().viewing_habitats(self.text, Data().listGround)
 #         tk.Button(self.window2_5, width=20, text="1. Exid", font=('Arial', 13), command=self.window2_5.destroy).pack(expand=True)
-#
-# """Удаление животных"""
+
+"""Удаление животных"""
+class SeeAnimals:  # удалить животных
+    def __init__(self):
+        self.seeAnimals = tk.Toplevel()
+        self.seeAnimals.grab_set()
+        self.seeAnimals['bg'] = '#33ffe6'
+        self.seeAnimals.geometry(f'550x500+500+50')
+        self.seeAnimals.title('See Animals')
+        self.animal = tk.StringVar()  # создали переменную для выбора животного
+
+        tk.Label(self.seeAnimals, text='Enter the name of the animal', font=('Arial', 13)).pack()
+        tk.Entry(self.seeAnimals, font=('Arial', 10), textvariable=self.animal).pack()
+        tk.Button(self.seeAnimals, text='exit', font=('Arial', 13), command=self.seeAnimals.destroy).pack(anchor='sw')
+        self.text = tk.Text(self.seeAnimals, font=('Arial', 13), bg='#33ffe6')
+        self.text.place(x=120, y=100, width=300, height=300)
+        WorkingMethods().view_all_animals(self.text, Data().listAnimal)
