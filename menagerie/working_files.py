@@ -74,6 +74,11 @@ class WorkingMethods:
                 listOb.append(animal)
         return listOb
 
+    def view_all_animals(self, text, listAnimal):  # просмотр всех животных
+        for animals in listAnimal:
+            stroka = animals.nickname + ' ' + animals.clasAnimal
+            text.insert('end', f'{stroka}\n')  # выводим строку
+
     def view_lungs_animal(self, text, listAnimal):  # топ 3 самых легких существа зоопарка
         for i in range(len(listAnimal)):
             for j in range(i, len(listAnimal)):
