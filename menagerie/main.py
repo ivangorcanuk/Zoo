@@ -149,7 +149,7 @@ class SeeAnimals:  # удалить животных
         self.label(self.seeAnimals, text='Enter the name of the animal:').grid(row=0, column=0)
         tk.Entry(self.seeAnimals, font=('Arial', 10), textvariable=self.animal).grid(row=0, column=1)
         self.button(self.seeAnimals, 'exit', self.seeAnimals.destroy).grid(row=2, column=1)
-        self.button(self.seeAnimals, 'search', self.selected_animal()).grid(row=2, column=0)
+        self.button(self.seeAnimals, 'search', self.selected_animal).grid(row=2, column=0)
         self.text = tk.Text(self.seeAnimals, font=('Arial', 13), bg='#33ffe6')
         self.text.place(x=120, y=100, width=300, height=300)
         WorkingMethods().view_all_animals(self.text, Data().listAnimal)
@@ -160,22 +160,27 @@ class SeeAnimals:  # удалить животных
     def label(self, window, text):
         return tk.Label(window, text=text, font=('Arial', 13))
 
+    def text1(self, window):
+        return tk.Text(window, font=('Arial', 13), bg='#33ffe6')
+
     def selected_animal(self):
+        print('ter')
         animal = self.animal.get()
         if self.examination(animal):  # вызвали функицю класс-метод
+            self.label1.destroy()
             animal = tk.Toplevel()
             animal.grab_set()
             animal.geometry(f'550x500+500+50')
-            animal.title('Animals')
+            animal.title('Animal Information')
             self.button(animal, 'exit', animal.destroy).grid(row=1, column=1)
+            text2 = self.text1(animal)
+            text2.place(x=120, y=270, width=300, height=100)
+            WorkingMethods().view_all_animals(text2, Data().listAnimal)
         else:
-            self.label(self.seeAnimals, text='В зоопарке нет животного с данным именем').grid(row=1, column=0)
+            print('xzfg')
+            self.label1 = self.label(self.seeAnimals, text='В зоопарке нет животного с данным именем').grid(row=1, column=0)
 
-    @classmethod
-    def examination(cls, animal):  # проверяем есть ли выбранное животное в общем списке
+    def examination(self, animal):  # проверяем есть ли выбранное животное в общем списке
         for name in Data().listAnimal:
             if name.nickname == animal:
                 return True
-class Animal:
-    def __init__(self):
-        pass
