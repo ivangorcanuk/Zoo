@@ -146,9 +146,36 @@ class SeeAnimals:  # удалить животных
         self.seeAnimals.title('See Animals')
         self.animal = tk.StringVar()  # создали переменную для выбора животного
 
-        tk.Label(self.seeAnimals, text='Enter the name of the animal', font=('Arial', 13)).pack()
-        tk.Entry(self.seeAnimals, font=('Arial', 10), textvariable=self.animal).pack()
-        tk.Button(self.seeAnimals, text='exit', font=('Arial', 13), command=self.seeAnimals.destroy).pack(anchor='sw')
+        self.label(self.seeAnimals, text='Enter the name of the animal:').grid(row=0, column=0)
+        tk.Entry(self.seeAnimals, font=('Arial', 10), textvariable=self.animal).grid(row=0, column=1)
+        self.button(self.seeAnimals, 'exit', self.seeAnimals.destroy).grid(row=2, column=1)
+        self.button(self.seeAnimals, 'search', self.selected_animal()).grid(row=2, column=0)
         self.text = tk.Text(self.seeAnimals, font=('Arial', 13), bg='#33ffe6')
         self.text.place(x=120, y=100, width=300, height=300)
         WorkingMethods().view_all_animals(self.text, Data().listAnimal)
+
+    def button(self, window, text, command):
+        return tk.Button(window, text=text, font=('Arial', 13), command=command)
+
+    def label(self, window, text):
+        return tk.Label(window, text=text, font=('Arial', 13))
+
+    def selected_animal(self):
+        animal = self.animal.get()
+        if self.examination(animal):  # вызвали функицю класс-метод
+            animal = tk.Toplevel()
+            animal.grab_set()
+            animal.geometry(f'550x500+500+50')
+            animal.title('Animals')
+            self.button(animal, 'exit', animal.destroy).grid(row=1, column=1)
+        else:
+            self.label(self.seeAnimals, text='В зоопарке нет животного с данным именем').grid(row=1, column=0)
+
+    @classmethod
+    def examination(cls, animal):  # проверяем есть ли выбранное животное в общем списке
+        for name in Data().listAnimal:
+            if name.nickname == animal:
+                return True
+class Animal:
+    def __init__(self):
+        pass
