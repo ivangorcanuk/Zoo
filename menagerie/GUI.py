@@ -5,13 +5,13 @@ class MainMenu:  # главное меню
     def __init__(self):
         self.main = tk.Tk()
         self.main['bg'] = '#33ffe6'
-        self.main.geometry(f'240x271+100+200')
+        self.main.geometry(f'430x380+500+50')
         self.main.title('Zoo')
 
-        self.button(self.main, 'Add an animal', self.open_window1).grid(row=1, column=0, sticky='wens', padx=50, pady=2)
-        self.button(self.main, 'Animal Ratings', self.open_window2).grid(row=2, column=0, sticky='wens', padx=50, pady=2)
-        self.button(self.main, 'See Animals', self.open_window3).grid(row=3, column=0, sticky='wens', padx=50, pady=2)
-        self.button(self.main, 'Exid', self.main.destroy).grid(row=4, column=0, sticky='wens', padx=50, pady=2)
+        self.button(self.main, 'Add an animal', self.open_window1).place(x=60, y=30, width=300, height=20)
+        self.button(self.main, 'Animal Ratings', self.open_window2).place(x=60, y=60, width=300, height=20)
+        self.button(self.main, 'See Animals', self.open_window3).place(x=60, y=90, width=300, height=20)
+        self.button(self.main, 'Exit', self.main.destroy).place(x=60, y=150, width=300, height=20)
 
     @staticmethod
     def button(window, text, command):
@@ -50,7 +50,7 @@ class AddingAnimals:  # добавить животное
         self.addingAnimals.grab_set()
         self.addingAnimals.title('Adding animals')
         self.addingAnimals['bg'] = '#33ffe6'
-        self.addingAnimals.geometry(f'500x600+500+50')
+        self.addingAnimals.geometry(f'460x670+500+50')
         self.valueStrSubspecies = tk.StringVar(self.addingAnimals, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
         self.valueStrHabitat = tk.StringVar(self.addingAnimals, 'est')  # аналогично для среды обитания
         self.valueStrClimate = tk.StringVar(self.addingAnimals, 'es')  # для климатических условий
@@ -60,43 +60,43 @@ class AddingAnimals:  # добавить животное
         self.value_weight = tk.StringVar()  # создали переменную для веса животного
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
 
-        MainMenu.label(self.addingAnimals, 'Выберите подвид животного:').grid(row=0, columnspan=3)
-        MainMenu.radiobutton(self.addingAnimals, 'ground', self.valueStrSubspecies).grid(row=1, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'underwater', self.valueStrSubspecies).grid(row=1, column=1)
-        MainMenu.radiobutton(self.addingAnimals, 'winged', self.valueStrSubspecies).grid(row=1, column=2)
+        MainMenu.label(self.addingAnimals, 'Выберите подвид животного:').place(x=10, y=10, width=240, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'ground', self.valueStrSubspecies).place(x=10, y=40, width=80, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'underwater', self.valueStrSubspecies).place(x=10, y=60, width=110, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'winged', self.valueStrSubspecies).place(x=10, y=80, width=80, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Укажите среду обитания данного подвида:').grid(row=2, columnspan=3)
-        MainMenu.radiobutton(self.addingAnimals, 'forests', self.valueStrHabitat).grid(row=3, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'mountains', self.valueStrHabitat).grid(row=4, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'steppes', self.valueStrHabitat).grid(row=3, column=1)
-        MainMenu.radiobutton(self.addingAnimals, 'rivers', self.valueStrHabitat).grid(row=4, column=1)
-        MainMenu.radiobutton(self.addingAnimals, 'seas', self.valueStrHabitat).grid(row=3, column=2)
-        MainMenu.radiobutton(self.addingAnimals, 'ocean', self.valueStrHabitat).grid(row=4, column=2)
+        MainMenu.label(self.addingAnimals, 'Укажите среду обитания данного подвида:').place(x=10, y=110, width=340, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'forests', self.valueStrHabitat).place(x=10, y=140, width=80, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'mountains', self.valueStrHabitat).place(x=10, y=160, width=100, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'steppes', self.valueStrHabitat).place(x=10, y=180, width=85, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'rivers', self.valueStrHabitat).place(x=10, y=200, width=65, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'seas', self.valueStrHabitat).place(x=10, y=220, width=60, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'ocean', self.valueStrHabitat).place(x=10, y=240, width=70, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Являются ли миграционным:').grid(row=5, columnspan=3)
-        MainMenu.radiobutton(self.addingAnimals, 'yes', self.valueBoolIsMigratory).grid(row=6, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'no', self.valueBoolIsMigratory).grid(row=6, column=1)
+        MainMenu.label(self.addingAnimals, 'Являются ли миграционным:').place(x=10, y=270, width=240, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'yes', self.valueBoolIsMigratory).place(x=10, y=300, width=55, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'no', self.valueBoolIsMigratory).place(x=10, y=320, width=45, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Укажите климатические условия:').grid(row=7, columnspan=3)
-        MainMenu.radiobutton(self.addingAnimals, 'warm', self.valueStrClimate).grid(row=8, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'cold', self.valueStrClimate).grid(row=8, column=1)
-        MainMenu.radiobutton(self.addingAnimals, 'moderate', self.valueStrClimate).grid(row=8, column=2)
+        MainMenu.label(self.addingAnimals, 'Укажите климатические условия:').place(x=10, y=350, width=270, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'warm', self.valueStrClimate).place(x=10, y=380, width=70, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'cold', self.valueStrClimate).place(x=10, y=400, width=60, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'moderate', self.valueStrClimate).place(x=10, y=420, width=95, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Явлиется ли зверь хищником:').grid(row=9, columnspan=3)
-        MainMenu.radiobutton(self.addingAnimals, 'yes', self.valueBoolIsPredator).grid(row=10, column=0)
-        MainMenu.radiobutton(self.addingAnimals, 'no', self.valueBoolIsPredator).grid(row=10, column=1)
+        MainMenu.label(self.addingAnimals, 'Явлиется ли зверь хищником:').place(x=10, y=450, width=245, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'yes', self.valueBoolIsPredator).place(x=10, y=480, width=55, height=20)
+        MainMenu.radiobutton(self.addingAnimals, 'no', self.valueBoolIsPredator).place(x=10, y=500, width=45, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Какую пищу употребляет:').grid(row=11, column=0)
-        MainMenu.entry(self.addingAnimals, self.value_food).grid(row=11, column=1)
+        MainMenu.label(self.addingAnimals, 'Какую пищу употребляет:').place(x=10, y=530, width=215, height=20)
+        MainMenu.entry(self.addingAnimals, self.value_food).place(x=230, y=530, width=220, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Укажите вес животного:').grid(row=12, column=0)
-        MainMenu.entry(self.addingAnimals, self.value_weight).grid(row=12, column=1)
+        MainMenu.label(self.addingAnimals, 'Укажите вес животного:').place(x=10, y=560, width=195, height=20)
+        MainMenu.entry(self.addingAnimals, self.value_weight).place(x=230, y=560, width=220, height=20)
 
-        MainMenu.label(self.addingAnimals, 'Придумайте кличку \n для нового жителя зоопарка:').grid(row=13, column=0)
-        MainMenu.entry(self.addingAnimals, self.value_nickname).grid(row=13, column=1)
+        MainMenu.label(self.addingAnimals, 'Придумайте кличку для\n нового жителя зоопарка:').place(x=10, y=590, width=195, height=40)
+        MainMenu.entry(self.addingAnimals, self.value_nickname).place(x=230, y=600, width=220, height=20)
 
-        MainMenu.button(self.addingAnimals, 'exit', self.addingAnimals.destroy).grid(row=17, column=0)
-        MainMenu.button(self.addingAnimals, 'save', self.save).grid(row=17, column=2)
+        MainMenu.button(self.addingAnimals, 'exit', self.addingAnimals.destroy).place(x=380, y=640, width=70, height=20)
+        MainMenu.button(self.addingAnimals, 'save', self.save).place(x=300, y=640, width=70, height=20)
 
     def save(self):
         subspecies_value = self.valueStrSubspecies.get()
@@ -117,18 +117,18 @@ class AnimalRatings:  # просмотр животных
         self.animalRatings = tk.Toplevel()
         self.animalRatings.grab_set()
         self.animalRatings['bg'] = '#33ffe6'
-        self.animalRatings.geometry(f'550x500+500+50')
+        self.animalRatings.geometry(f'430x380+500+50')
         self.animalRatings.title('Animal Ratings')
 
-        MainMenu.button(self.animalRatings, 'Top 3 Lightest Zoo Creatures', lambda: self.open_window(1)).grid(row=1, column=0, padx=30, pady=2)
-        MainMenu.button(self.animalRatings, 'Top 5 biggest predators', lambda: self.open_window(2)).grid(row=2, column=0, padx=30, pady=2)
-        MainMenu.button(self.animalRatings, 'List of herbivore names', lambda: self.open_window(3)).grid(row=3, column=0, padx=30, pady=2)
-        MainMenu.button(self.animalRatings, 'List of underwater creatures in decreasing order of their weight', lambda: self.open_window(4)).grid(row=4, column=0, padx=30, pady=2)
-        MainMenu.button(self.animalRatings, 'List of land animals, with each name and location', lambda: self.open_window(5)).grid(row=5, column=0, padx=30, pady=2)
-        MainMenu.button(self.animalRatings, 'Exit', self.animalRatings.destroy).grid(row=6, column=0, padx=30, pady=2)
+        MainMenu.button(self.animalRatings, 'Top 3 Lightest Zoo Creatures', lambda: self.open_window(1)).place(x=60, y=30, width=300, height=20)
+        MainMenu.button(self.animalRatings, 'Top 5 biggest predators', lambda: self.open_window(2)).place(x=60, y=60, width=300, height=20)
+        MainMenu.button(self.animalRatings, 'List of herbivore names', lambda: self.open_window(3)).place(x=60, y=90, width=300, height=20)
+        MainMenu.button(self.animalRatings, 'List of underwater creatures\n in decreasing order of their weight', lambda: self.open_window(4)).place(x=60, y=120, width=300, height=40)
+        MainMenu.button(self.animalRatings, 'List of land animals,\n with each name and location', lambda: self.open_window(5)).place(x=60, y=170, width=300, height=40)
+        MainMenu.button(self.animalRatings, 'Exit', self.animalRatings.destroy).place(x=60, y=350, width=300, height=20)
         self.text = MainMenu.text(self.animalRatings)
         self.text.insert('end', f'Выберите текс')
-        self.text.place(x=120, y=270, width=300, height=100)
+        self.text.place(x=60, y=230, width=300, height=100)
 
     def open_window(self, ark):
         self.text.delete('1.0', 'end')  # удалили предыдущий текст в текстовом окне
@@ -190,7 +190,8 @@ class SeeAnimals:  # просмотр
 
         MainMenu.label(self.seeAnimals, text='Enter the name of the animal:').place(x=10, y=10, width=220, height=20)
         MainMenu.entry(self.seeAnimals, self.choice_animal).place(x=240, y=10, width=100, height=20)
-        MainMenu.label(self.seeAnimals, 'Список всех животных зоопарка').place(x=90, y=40, width=250, height=20)
+        self.label = MainMenu.label(self.seeAnimals, 'Список всех животных зоопарка')
+        self.label.place(x=90, y=40, width=285, height=20)
         MainMenu.button(self.seeAnimals, 'exit', self.seeAnimals.destroy).place(x=350, y=350, width=70, height=20)
         MainMenu.button(self.seeAnimals, 'search', self.selected_animal).place(x=350, y=10, width=70, height=20)
         self.text = MainMenu.text(self.seeAnimals)
@@ -203,21 +204,22 @@ class SeeAnimals:  # просмотр
             self.text.insert('end', f'{stroka}\n')
 
     def selected_animal(self):
-        print('ter')
         name_animal = self.choice_animal.get()
         if self.examination(name_animal):  # вызвали функицю класс-метод
+            if self.label['text'] != 'Список всех животных зоопарка':
+                self.label.config(text='Список всех животных зоопарка')
             window_animal = tk.Toplevel()
             window_animal.grab_set()
-            window_animal.geometry(f'350x300+500+50')
+            window_animal.geometry(f'430x380+500+50')
             window_animal['bg'] = '#33ffe6'
             window_animal.title('Animal Information')
-            MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=120, y=370, width=50, height=30)
-            MainMenu.button(window_animal, 'delete', window_animal.destroy).place(x=100, y=370, width=60, height=30)
+            MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=350, y=350, width=70, height=20)
+            MainMenu.button(window_animal, 'delete', window_animal.destroy).place(x=260, y=350, width=80, height=20)
             text = MainMenu.text(window_animal)
-            text.place(x=120, y=70, width=300, height=160)
+            text.place(x=70, y=70, width=300, height=175)
             text.insert('end', f'{self.view_all_animals(name_animal)}')
         else:
-            print('xzfg')
+            self.label.config(text='Вы указали неверное имя животного')
 
     def examination(self, animalName):  # проверяем есть ли выбранное животное в общем списке
         for name in Data().listAnimal:
@@ -232,21 +234,19 @@ class SeeAnimals:  # просмотр
                     predator = 'да'
                 else:
                     predator = 'нет'
-                tyh = f'Кличка - {anm.nickname}\n' \
+                tyh = f'Животное - {anm.clasAnimal}\n' \
+                      f'Кличка - {anm.nickname}\n' \
                       f'Тип - {anm.typeAnimal}\n' \
                       f'Хищник - {predator}\n' \
                       f'Масса - {anm.weight}\n' \
                       f'Место обитания - {anm.dwells}\n' \
                       f'Климат - {anm.climate}\n' \
-                      f'Название животного - {anm.clasAnimal}\n'
+                      f'Употребляемая пища - мясо'
                 if anm.typeAnimal == 'крылатый':
                     if anm.migratory:
                         migratory = 'да'
                     else:
                         migratory = 'нет'
-                    tyh = tyh + f'Миграционный - {migratory}\n'
+                    tyh = tyh + f'\nМиграционный - {migratory}'
                 return tyh
 
-
-mainMenu = MainMenu().main
-mainMenu.mainloop()
