@@ -1,5 +1,5 @@
 from working_files import WorkingMethods, WorkingFiles
-#from GUI import *
+from GUI import *
 
 """Данные"""
 class Data:
@@ -13,3 +13,6 @@ class Data:
         self.listWinged = self.clasMetod.animal_sorting_clas('крылатый', self.listAnimal)  # создаем список с крылатыми животными
 
 
+if __name__ == "__main__":
+    mainMenu = MainMenu().main
+    mainMenu.mainloop()
