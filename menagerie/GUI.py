@@ -174,7 +174,7 @@ class AnimalRatings:  # просмотр животных
         elif ark == 5:
             list_ground = Data().listGround
             for ground in list_ground:  # просмотр наземных животных с кличкой каждого и местом обитания
-                stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + ground.weight + ' кг'
+                stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + str(ground.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
 """Просмотр животных"""
@@ -184,18 +184,18 @@ class SeeAnimals:  # просмотр
         self.seeAnimals = tk.Toplevel()
         self.seeAnimals.grab_set()
         self.seeAnimals['bg'] = '#33ffe6'
-        self.seeAnimals.geometry(f'550x500+500+50')
+        self.seeAnimals.geometry(f'430x380+500+50')
         self.seeAnimals.title('See Animals')
         self.choice_animal = tk.StringVar()  # создали переменную для выбора животного
 
-        MainMenu.label(self.seeAnimals, text='Enter the name of the animal:').grid(row=0, column=0)
-        MainMenu.entry(self.seeAnimals, self.choice_animal).grid(row=0, column=1)
-        MainMenu.label(self.seeAnimals, 'В зоопарке нет животного с данным именем').grid(row=1, column=0)
-        MainMenu.button(self.seeAnimals, 'exit', self.seeAnimals.destroy).grid(row=2, column=1)
-        MainMenu.button(self.seeAnimals, 'search', self.selected_animal).grid(row=2, column=0)
+        MainMenu.label(self.seeAnimals, text='Enter the name of the animal:').place(x=10, y=10, width=220, height=20)
+        MainMenu.entry(self.seeAnimals, self.choice_animal).place(x=240, y=10, width=100, height=20)
+        MainMenu.label(self.seeAnimals, 'Список всех животных зоопарка').place(x=90, y=40, width=250, height=20)
+        MainMenu.button(self.seeAnimals, 'exit', self.seeAnimals.destroy).place(x=350, y=350, width=70, height=20)
+        MainMenu.button(self.seeAnimals, 'search', self.selected_animal).place(x=350, y=10, width=70, height=20)
         self.text = MainMenu.text(self.seeAnimals)
         self.brings_out_animals()
-        self.text.place(x=120, y=100, width=300, height=300)
+        self.text.place(x=70, y=70, width=300, height=270)
 
     def brings_out_animals(self):
         for an in Data().listAnimal:
@@ -208,12 +208,14 @@ class SeeAnimals:  # просмотр
         if self.examination(name_animal):  # вызвали функицю класс-метод
             window_animal = tk.Toplevel()
             window_animal.grab_set()
-            window_animal.geometry(f'550x500+500+50')
+            window_animal.geometry(f'350x300+500+50')
+            window_animal['bg'] = '#33ffe6'
             window_animal.title('Animal Information')
-            MainMenu.button(window_animal, 'exit', window_animal.destroy).grid(row=1, column=1)
+            MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=120, y=370, width=50, height=30)
+            MainMenu.button(window_animal, 'delete', window_animal.destroy).place(x=100, y=370, width=60, height=30)
             text = MainMenu.text(window_animal)
-            text.place(x=120, y=270, width=300, height=100)
-            WorkingMethods().view_all_animals(text, Data().listAnimal)
+            text.place(x=120, y=70, width=300, height=160)
+            text.insert('end', f'{self.view_all_animals(name_animal)}')
         else:
             print('xzfg')
 
@@ -224,10 +226,26 @@ class SeeAnimals:  # просмотр
         return False
 
     def view_all_animals(self, name_animal):  # проверяем есть ли выбранное животное в общем списке
-        for name in Data().listAnimal:
-            if name.nickname == name_animal:
-                return True
-        return False
+        for anm in Data().listAnimal:
+            if anm.nickname == name_animal:
+                if anm.predator:
+                    predator = 'да'
+                else:
+                    predator = 'нет'
+                tyh = f'Кличка - {anm.nickname}\n' \
+                      f'Тип - {anm.typeAnimal}\n' \
+                      f'Хищник - {predator}\n' \
+                      f'Масса - {anm.weight}\n' \
+                      f'Место обитания - {anm.dwells}\n' \
+                      f'Климат - {anm.climate}\n' \
+                      f'Название животного - {anm.clasAnimal}\n'
+                if anm.typeAnimal == 'крылатый':
+                    if anm.migratory:
+                        migratory = 'да'
+                    else:
+                        migratory = 'нет'
+                    tyh = tyh + f'Миграционный - {migratory}\n'
+                return tyh
 
 
 mainMenu = MainMenu().main
