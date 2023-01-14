@@ -74,54 +74,55 @@ class WorkingMethods:
                 listOb.append(animal)
         return listOb
 
-    def view_all_animals(self, text, listAnimal):  # просмотр всех животных
-        for animals in listAnimal:
-            stroka = animals.nickname + ' ' + animals.clasAnimal
-            text.insert('end', f'{stroka}\n')  # выводим строку
+    # def view_all_animals(self, text, listAnimal):  # просмотр всех животных
+    #     for animals in listAnimal:
+    #         stroka = animals.nickname + ' ' + animals.clasAnimal
+    #         text.insert('end', f'{stroka}\n')  # выводим строку
 
-    def view_lungs_animal(self, text, listAnimal):  # топ 3 самых легких существа зоопарка
+    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
+        list_light_creatures = list()
         for i in range(len(listAnimal)):
             for j in range(i, len(listAnimal)):
                 if listAnimal[i] > listAnimal[j]:
                     f = listAnimal[j]
                     listAnimal[j] = listAnimal[i]
                     listAnimal[i] = f
-            stroka = listAnimal[i].nickname + ' ' + listAnimal[i].clasAnimal + ' ' + str(listAnimal[i].weight) + ' кг'
-            text.insert('end', f'{stroka}\n')  # выводим строку
+            list_light_creatures.append(listAnimal[i])
             if i == 2:
-                break
+                return list_light_creatures
 
-    def viewing_large_animal(self, text, listPredator):  # топ 5 самых больших хищников
+    def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
+        list_big_predator = list()
         for i in range(len(listPredator)):
             for j in range(i, len(listPredator)):
                 if listPredator[i] < listPredator[j]:
                     f = listPredator[j]
                     listPredator[j] = listPredator[i]
                     listPredator[i] = f
-            stroka = listPredator[i].nickname + ' ' + listPredator[i].clasAnimal + ' ' + str(listPredator[i].weight) + ' кг'
-            text.insert('end', f'{stroka}\n')
+            list_big_predator.append(listPredator[i])
             if i == 4:
-                break
+                return list_big_predator
 
-    def viewing_name_herbivorous(self, text, listHerbivorous):  # просмотр кличек травоядных существ
-        for herbivorous in listHerbivorous:
-            stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
-            text.insert('end', f'{stroka}\n')
+    # def viewing_name_herbivorous(self, text, listHerbivorous):  # просмотр кличек травоядных существ
+    #     for herbivorous in listHerbivorous:
+    #         stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
+    #         text.insert('end', f'{stroka}\n')
 
-    def view_descending_weight(self, text, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+        list_under_desc_weight = list()
         for i in range(len(listUnderwater)):
             for j in range(i, len(listUnderwater)):
                 if listUnderwater[i] < listUnderwater[j]:
                     f = listUnderwater[j]
                     listUnderwater[j] = listUnderwater[i]
                     listUnderwater[i] = f
-            stroka = listUnderwater[i].nickname + ' ' + listUnderwater[i].clasAnimal + ' ' + str(listUnderwater[i].weight) + ' кг'
-            text.insert('end', f'{stroka}\n')
+            list_under_desc_weight.append(listUnderwater[i])
+        return list_under_desc_weight
 
-    def viewing_habitats(self, text, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
-        for ground in listGround:
-            stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + ground.dwells + ' кг'
-            text.insert('end', f'{stroka}\n')
+    # def viewing_habitats(self, text, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
+    #     for ground in listGround:
+    #         stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + ground.dwells + ' кг'
+    #         text.insert('end', f'{stroka}\n')
 
     def number_assignment(self, listAnimal):  # присвоение уникального номера животному
         for animal in listAnimal:

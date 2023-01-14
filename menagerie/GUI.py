@@ -133,45 +133,31 @@ class AnimalRatings(tk.Toplevel):  # просмотр животных
 
     def open_window(self, ark):
         self.text.delete('1.0', 'end')  # удалили предыдущий текст в текстовом окне
+
         if ark == 1:
-            list_animal = Data().listAnimal
-            for i in range(len(list_animal)):  # топ 3 самых легких существа зоопарка
-                for j in range(i, len(list_animal)):
-                    if list_animal[i] > list_animal[j]:
-                        f = list_animal[j]
-                        list_animal[j] = list_animal[i]
-                        list_animal[i] = f
-                stroka = list_animal[i].nickname + ' ' + list_animal[i].clasAnimal + ' ' + str(list_animal[i].weight) + ' кг'
+            list_light_creatures = Data().top_3
+            for creature in list_light_creatures:  # топ 3 самых легких существа зоопарка
+                stroka = creature.nickname + ' ' + creature.clasAnimal + ' ' + str(creature.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')  # выводим строку
-                if i == 2:
-                    break
+
         elif ark == 2:
-            list_predator = Data().listPredator
-            for i in range(len(list_predator)):  # топ 5 самых больших хищников
-                for j in range(i, len(list_predator)):
-                    if list_predator[i] < list_predator[j]:
-                        f = list_predator[j]
-                        list_predator[j] = list_predator[i]
-                        list_predator[i] = f
-                stroka = list_predator[i].nickname + ' ' + list_predator[i].clasAnimal + ' ' + str(list_predator[i].weight) + ' кг'
+            list_big_predator = Data().top_5
+            for pred in list_big_predator:  # топ 5 самых больших хищников
+                stroka = pred.nickname + ' ' + pred.clasAnimal + ' ' + str(pred.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
-                if i == 4:
-                    break
+
         elif ark == 3:
             list_herbivorous = Data().listHerbivorous
             for herbivorous in list_herbivorous:  # просмотр кличек травоядных существ
                 stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
                 self.text.insert('end', f'{stroka}\n')
+
         elif ark == 4:
-            list_underwater = Data().listUnderwater
-            for i in range(len(list_underwater)):  # просмотр подводных существ по мере убывания их веса
-                for j in range(i, len(list_underwater)):
-                    if list_underwater[i] < list_underwater[j]:
-                        f = list_underwater[j]
-                        list_underwater[j] = list_underwater[i]
-                        list_underwater[i] = f
-                stroka = list_underwater[i].nickname + ' ' + list_underwater[i].clasAnimal + ' ' + str(list_underwater[i].weight) + ' кг'
+            list_under_desc_weight = Data().top_7
+            for under in list_under_desc_weight:  # просмотр подводных существ по мере убывания их веса
+                stroka = under.nickname + ' ' + under.clasAnimal + ' ' + str(under.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
+
         elif ark == 5:
             list_ground = Data().listGround
             for ground in list_ground:  # просмотр наземных животных с кличкой каждого и местом обитания
