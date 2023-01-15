@@ -13,8 +13,8 @@ class WorkingFiles:
                 if s[j] != '\n':
                     spTempAnimal.append(s[j])
                 else:
-                    obj = WorkingMethods().registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], spTempAnimal[3],
-                    float(spTempAnimal[4]), spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8], spTempAnimal[9])
+                    obj = WorkingMethods().registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], float(spTempAnimal[3]),
+                    spTempAnimal[4], spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
                     listAnimals.append(obj)
                     spTempAnimal = list()
         return listAnimals
@@ -26,38 +26,38 @@ class WorkingFiles:
             file.close()
 
 class WorkingMethods:
-    def registrationAnimal(self, number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
+    def registrationAnimal(self, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
         obj = None
         predator = predator == 'да'
         migratory = migratory == 'да'
         if clasAnimal == 'попугай':
-            obj = Parrot(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+            obj = Parrot(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         elif clasAnimal == 'выдра':
-            obj = Otter(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Otter(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'волк':
-            obj = Wolf(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Wolf(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'заец':
-            obj = Hare(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Hare(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'косуля':
-            obj = Roe(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Roe(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'бизон':
-            obj = Buffalo(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Buffalo(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'страус':
-            obj = Ostrich(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+            obj = Ostrich(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         elif clasAnimal == 'дельфин':
-            obj = Dolphin(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Dolphin(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'тигр':
-            obj = Tiger(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Tiger(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'осьминог':
-            obj = Octopus(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Octopus(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'журавль':
-            obj = Crane(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+            obj = Crane(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         elif clasAnimal == 'щука':
-            obj = Pike(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Pike(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'зебра':
-            obj = Zebra(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
+            obj = Zebra(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'голубь':
-            obj = Pigeon(number, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+            obj = Pigeon(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         return obj
 
     def animal_sorting_tupe(self, tupe, listAnimal):  # сортировка животных на хищных и травоядных
@@ -73,11 +73,6 @@ class WorkingMethods:
             if clas == animal.typeAnimal:
                 listOb.append(animal)
         return listOb
-
-    # def view_all_animals(self, text, listAnimal):  # просмотр всех животных
-    #     for animals in listAnimal:
-    #         stroka = animals.nickname + ' ' + animals.clasAnimal
-    #         text.insert('end', f'{stroka}\n')  # выводим строку
 
     def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
         list_light_creatures = list()
@@ -103,11 +98,6 @@ class WorkingMethods:
             if i == 4:
                 return list_big_predator
 
-    # def viewing_name_herbivorous(self, text, listHerbivorous):  # просмотр кличек травоядных существ
-    #     for herbivorous in listHerbivorous:
-    #         stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
-    #         text.insert('end', f'{stroka}\n')
-
     def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
         list_under_desc_weight = list()
         for i in range(len(listUnderwater)):
@@ -118,12 +108,3 @@ class WorkingMethods:
                     listUnderwater[i] = f
             list_under_desc_weight.append(listUnderwater[i])
         return list_under_desc_weight
-
-    # def viewing_habitats(self, text, listGround):  # просмотр наземных животных с кличкой каждого и местом обитания
-    #     for ground in listGround:
-    #         stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + ground.dwells + ' кг'
-    #         text.insert('end', f'{stroka}\n')
-
-    def number_assignment(self, listAnimal):  # присвоение уникального номера животному
-        for animal in listAnimal:
-            pass
