@@ -1,6 +1,11 @@
 import tkinter as tk
 from main import Data
 
+# сделать кнопку неактивной
+# вставить картинку
+# использовать месечбокс
+# использовать выподающее меню
+
 class MainMenu(tk.Tk):  # главное меню
     def __init__(self):
         super().__init__()
@@ -184,7 +189,7 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         self.brings_out_animals()
         self.text.place(x=70, y=70, width=300, height=270)
 
-    def brings_out_animals(self):
+    def brings_out_animals(self):  # перечислили животных
         for an in Data().listAnimal:
             stroka = an.nickname + ' ' + an.clasAnimal
             self.text.insert('end', f'{stroka}\n')
@@ -227,7 +232,7 @@ class SeeAnimals(tk.Toplevel):  # просмотр
                       f'Масса - {anm.weight}\n' \
                       f'Место обитания - {anm.dwells}\n' \
                       f'Климат - {anm.climate}\n' \
-                      f'Употребляемая пища - мясо'
+                      f'Употребляемая пища - {anm.food}'
                 if anm.typeAnimal == 'крылатый':
                     if anm.migratory:
                         migratory = 'да'
