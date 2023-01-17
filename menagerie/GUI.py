@@ -238,15 +238,24 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         if self.examination():  # вызвали функицю класс-метод
             if self.label['text'] != 'Список всех животных зоопарка':
                 self.label.config(text='Список всех животных зоопарка')
+
             window_animal = tk.Toplevel()
             window_animal.grab_set()
             window_animal.geometry(f'430x380+500+50')
             window_animal['bg'] = '#33ffe6'
             window_animal.title('Animal Information')
+
+            menu_win_an = tk.Menu(window_animal)  # создали меню
+            window_animal.configure(menu=menu_win_an)  # разместили меню
+            first_item = tk.Menu(menu_win_an, tearoff=0)  # создали элементы меню
+            menu_win_an.add_cascade(label='change', font=('Arial', 13), menu=first_item)  # распалагаем 1-ый пункт меню
+            first_item.add_command(label='вес', font=('Arial', 13))
+            first_item.add_command(label='пищу', font=('Arial', 13))
+
             self.img = tk.PhotoImage(file=self.picture_selection())
             tk.Label(window_animal, image=self.img).place(x=120, y=10)
             MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=350, y=350, width=70, height=20)
-            MainMenu.button(window_animal, 'delete', window_animal.destroy).place(x=260, y=350, width=80, height=20)
+            #MainMenu.button(window_animal, 'change', window_animal.destroy).place(x=260, y=350, width=80, height=20)
             text = MainMenu.text(window_animal)
             text.place(x=70, y=165, width=300, height=175)
             text.insert('end', f'{self.view_all_animals()}')
