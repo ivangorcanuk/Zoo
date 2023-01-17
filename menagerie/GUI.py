@@ -1,10 +1,12 @@
 import tkinter as tk
+from tkinter import messagebox as mb
 from main import Data
 
 # сделать кнопку неактивной
 # вставить картинку
-# использовать месечбокс
-# использовать выподающее меню
+# использовать MessageBox
+# использовать выпадающее меню
+# использовать Combobox
 
 class MainMenu(tk.Tk):  # главное меню
     def __init__(self):
@@ -59,13 +61,28 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         self['bg'] = '#33ffe6'
         self.geometry(f'460x670+500+50')
         self.valueStrSubspecies = tk.StringVar(self, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
+        self.valueStrSubspecies.trace("r", self.data_checking)
         self.valueStrHabitat = tk.StringVar(self, 'est')  # аналогично для среды обитания
+        self.valueStrHabitat.trace("r", self.data_checking)
         self.valueStrClimate = tk.StringVar(self, 'es')  # для климатических условий
+        self.valueStrClimate.trace("r", self.data_checking)
         self.valueBoolIsMigratory = tk.StringVar(self, '1')  # создали переменную с числовым значением - миграция
         self.valueBoolIsPredator = tk.StringVar(self, '2')  # создали переменную с числовым значением - хищник
         self.value_food = tk.StringVar()  # создали переменную для пищи животного
+        self.value_food.trace("w", self.data_checking)
         self.value_weight = tk.StringVar()  # создали переменную для веса животного
+        self.value_weight.trace("w", self.data_checking)
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
+        self.value_nickname.trace("w", self.data_checking)
+
+        self.subspecies_value = str()
+        self.habitat_value = str()
+        self.climate_value = str()
+        self.migratory_boolean = str()
+        self.predator_boolean = str()
+        self.food_value = str()
+        self.weight_value = str()
+        self.nickname_value = str()
 
         MainMenu.label(self, 'Выберите подвид животного:').place(x=10, y=10, width=240, height=20)
         MainMenu.radiobutton(self, 'ground', self.valueStrSubspecies).place(x=10, y=40, width=80, height=20)
@@ -102,20 +119,40 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         MainMenu.label(self, 'Придумайте кличку для\n нового жителя зоопарка:').place(x=10, y=590, width=195, height=40)
         MainMenu.entry(self, self.value_nickname).place(x=230, y=600, width=220, height=20)
 
-        MainMenu.button(self, 'exit', self.destroy).place(x=380, y=640, width=70, height=20)
-        MainMenu.button(self, 'save', self.save).place(x=300, y=640, width=70, height=20)
+        MainMenu.button(self, 'exit', self.exit).place(x=380, y=640, width=70, height=20)
+        self.button = MainMenu.button(self, 'save', self.save)
+        self.button.config(state='disabled')  # сделали кнопку неактивной
+        self.button.place(x=300, y=640, width=70, height=20)
+
+    def data_checking(self, *args):
+        subspecies_value = self.valueStrSubspecies.get() != 'esth'
+        habitat_value = self.valueStrHabitat.get() != 'est'
+        climate_value = self.valueStrClimate.get() != 'es'
+        migratory_boolean = self.valueBoolIsMigratory.get() != '1'
+        predator_boolean = self.valueBoolIsPredator.get() != '2'
+        food_value = len(self.value_food.get()) > 1
+        weight_value = len(self.value_weight.get()) > 1
+        nickname_value = len(self.value_nickname.get()) > 1
+        if subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and weight_value and nickname_value:
+            self.button.config(state='normal')
 
     def save(self):
-        subspecies_value = self.valueStrSubspecies.get()
-        habitat_value = self.valueStrHabitat.get()
-        climate_value = self.valueStrClimate.get()
-        migratory_boolean = self.valueBoolIsMigratory.get() == 'yes'
-        predator_boolean = self.valueBoolIsPredator.get() == 'yes'
-        food_value = self.value_food.get()
-        weight_value = self.value_weight.get()
-        nickname_value = self.value_nickname.get()
-        print(subspecies_value, habitat_value, climate_value, migratory_boolean, predator_boolean, food_value, weight_value, nickname_value)
+        self.subspecies_value = self.valueStrSubspecies.get()
+        self.habitat_value = self.valueStrHabitat.get()
+        self.climate_value = self.valueStrClimate.get()
+        self.migratory_boolean = self.valueBoolIsMigratory.get() == 'yes'
+        self.predator_boolean = self.valueBoolIsPredator.get() == 'no'
+        self.food_value = self.value_food.get()
+        self.weight_value = self.value_weight.get()
+        self.nickname_value = self.value_nickname.get()
+        print(self.subspecies_value, self.habitat_value, self.climate_value, self.migratory_boolean,
+              self.predator_boolean, self.food_value, self.weight_value, self.nickname_value)
         self.destroy()
+
+    def exit(self):
+        com = mb.askyesno('Attention!', 'If you exit now the animal will not be saved.')
+        if com:
+            self.destroy()
 
 """Просмотр рейтингов"""
 
@@ -178,6 +215,8 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         self.geometry(f'430x380+500+50')
         self.title('See Animals')
         self.choice_animal = tk.StringVar()  # создали переменную для выбора животного
+        self.name_animal = str()  # переменная куда бует сохраняться выбранное животное
+        self.img = None  # переменная в которой лежит картинка животного
 
         MainMenu.label(self, text='Enter the name of the animal:').place(x=10, y=10, width=220, height=20)
         MainMenu.entry(self, self.choice_animal).place(x=240, y=10, width=100, height=20)
@@ -195,8 +234,8 @@ class SeeAnimals(tk.Toplevel):  # просмотр
             self.text.insert('end', f'{stroka}\n')
 
     def selected_animal(self):
-        name_animal = self.choice_animal.get()
-        if self.examination(name_animal):  # вызвали функицю класс-метод
+        self.name_animal = self.choice_animal.get()
+        if self.examination():  # вызвали функицю класс-метод
             if self.label['text'] != 'Список всех животных зоопарка':
                 self.label.config(text='Список всех животных зоопарка')
             window_animal = tk.Toplevel()
@@ -204,23 +243,25 @@ class SeeAnimals(tk.Toplevel):  # просмотр
             window_animal.geometry(f'430x380+500+50')
             window_animal['bg'] = '#33ffe6'
             window_animal.title('Animal Information')
+            self.img = tk.PhotoImage(file=self.picture_selection())
+            tk.Label(window_animal, image=self.img).place(x=120, y=10)
             MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=350, y=350, width=70, height=20)
             MainMenu.button(window_animal, 'delete', window_animal.destroy).place(x=260, y=350, width=80, height=20)
             text = MainMenu.text(window_animal)
-            text.place(x=70, y=70, width=300, height=175)
-            text.insert('end', f'{self.view_all_animals(name_animal)}')
+            text.place(x=70, y=165, width=300, height=175)
+            text.insert('end', f'{self.view_all_animals()}')
         else:
             self.label.config(text='Вы указали неверное имя животного')
 
-    def examination(self, animalName):  # проверяем есть ли выбранное животное в общем списке
+    def examination(self):  # проверяем есть ли выбранное животное в общем списке
         for name in Data().listAnimal:
-            if name.nickname == animalName:
+            if name.nickname == self.name_animal:
                 return True
         return False
 
-    def view_all_animals(self, name_animal):  # проверяем есть ли выбранное животное в общем списке
+    def view_all_animals(self):  # выводим информацию о животном
         for anm in Data().listAnimal:
-            if anm.nickname == name_animal:
+            if anm.nickname == self.name_animal:
                 if anm.predator:
                     predator = 'да'
                 else:
@@ -241,3 +282,45 @@ class SeeAnimals(tk.Toplevel):  # просмотр
                     tyh = tyh + f'\nМиграционный - {migratory}'
                 return tyh
 
+    def picture_selection(self):
+        if self.name_animal == 's':
+            return 'images/popugay.png'
+
+        elif self.name_animal == 'Зина':
+            return 'images/otter.png'
+
+        elif self.name_animal == 'Серый':
+            return 'images/wolf.png'
+
+        elif self.name_animal == 'Косой':
+            return 'images/hare.png'
+
+        elif self.name_animal == 'Ренат':
+            return 'images/roe.png'
+
+        elif self.name_animal == 'Гриша':
+            return 'images/buffalo.png'
+
+        elif self.name_animal == 'Веня':
+            return 'images/ostrich.png'
+
+        elif self.name_animal == 'Джульета':
+            return 'images/dolphin.png'
+
+        elif self.name_animal == 'Полосатый':
+            return 'images/tiger.png'
+
+        elif self.name_animal == 'Сан':
+            return 'images/octopus.png'
+
+        elif self.name_animal == 'Жура':
+            return 'images/crane.png'
+
+        elif self.name_animal == 'Полосатая':
+            return 'images/pike.png'
+
+        elif self.name_animal == 'Черныш':
+            return 'images/zebra.png'
+
+        elif self.name_animal == 'Гарик':
+            return 'images/pigeon.png'
