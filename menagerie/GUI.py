@@ -71,13 +71,14 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         self.valueBoolIsPredator = tk.StringVar(self, '2')  # создали переменную с числовым значением - хищник
         self.value_food = tk.StringVar()  # создали переменную для пищи животного
         self.value_food.trace("w", self.data_checking)
-        self.value_weight = tk.DoubleVar(self, value=0)  # создали переменную для веса животного
+        self.value_weight = tk.StringVar()  # создали переменную для веса животного
         self.value_weight.trace("w", self.data_checking)
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
         self.value_nickname.trace("w", self.data_checking)
 
         self.migratory_boolean = None
         self.predator_boolean = None
+        self.bul = False
 
         MainMenu.label(self, 'Укажите тип животного:').place(x=10, y=10, width=200, height=20)
         self.combo = ttk.Combobox(self, values=self.list_animal_type, font=('Arial', 10))
@@ -131,11 +132,13 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         migratory_boolean = self.valueBoolIsMigratory.get() != '1'
         predator_boolean = self.valueBoolIsPredator.get() != '2'
         food_value = len(self.value_food.get()) > 1
-        weight_value = self.value_weight.get() > 0
+        weight_value = len(self.value_weight.get()) > 0
         nickname_value = len(self.value_nickname.get()) > 1
-        if type_value and subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and weight_value and nickname_value:
-            print('lol')
-            self.button.config(state='normal')
+        if not self.bul:
+            if type_value and subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and float(weight_value) and nickname_value:
+                print('кнопка стала активной')
+                self.bul = True
+                self.button.config(state='normal')
 
     def save(self):
         self.migratory_boolean = self.valueBoolIsMigratory.get() == 'yes'
