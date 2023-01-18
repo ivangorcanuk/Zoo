@@ -1,4 +1,6 @@
 from animal_type import Parrot, Otter, Wolf, Hare, Roe, Buffalo, Ostrich, Dolphin, Tiger, Octopus, Crane, Pike, Zebra, Pigeon
+
+
 class WorkingFiles:
     def reading(self):  # считывание с файла
         with open('animals.txt', 'r', encoding="utf-8") as file:
@@ -13,6 +15,8 @@ class WorkingFiles:
                 if s[j] != '\n':
                     spTempAnimal.append(s[j])
                 else:
+                    spTempAnimal[2] = spTempAnimal[2] == 'да'
+                    spTempAnimal[8] = spTempAnimal[8] == 'да'
                     obj = WorkingMethods().registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], float(spTempAnimal[3]),
                     spTempAnimal[4], spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
                     listAnimals.append(obj)
@@ -25,18 +29,18 @@ class WorkingFiles:
                 file.writelines(str(animal) + '\n')
             file.close()
 
+
 class WorkingMethods:
+
     def registrationAnimal(self, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
         obj = None
-        predator = predator == 'да'
-        migratory = migratory == 'да'
         if clasAnimal == 'попугай':
             obj = Parrot(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         elif clasAnimal == 'выдра':
             obj = Otter(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'волк':
             obj = Wolf(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'заец':
+        elif clasAnimal == 'заяц':
             obj = Hare(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
         elif clasAnimal == 'косуля':
             obj = Roe(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
@@ -108,3 +112,15 @@ class WorkingMethods:
                     listUnderwater[i] = f
             list_under_desc_weight.append(listUnderwater[i])
         return list_under_desc_weight
+
+    def saves_animal_names(self, listAnimal):  # сохраняем в отдельный список клички животных
+        list_animal_names = list()
+        for name in listAnimal:
+            list_animal_names.append(name.nickname)
+        return list_animal_names
+
+    def saves_animal_type(self, listAnimal):  # сохраняем в отдельный список тип животных
+        list_animal_type = list()
+        for animal in listAnimal:
+            list_animal_type.append(animal.clasAnimal)
+        return list_animal_type
