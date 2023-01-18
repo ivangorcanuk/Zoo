@@ -1,19 +1,18 @@
 import tkinter as tk
 from tkinter import messagebox as mb
-from main import Data
+from tkinter import ttk
+from main import DataBackend
 
-# сделать кнопку неактивной
-# вставить картинку
-# использовать MessageBox
-# использовать выпадающее меню
-# использовать Combobox
+data = DataBackend()
 
 class MainMenu(tk.Tk):  # главное меню
     def __init__(self):
         super().__init__()
-        self['bg'] = '#33ffe6'
-        self.geometry(f'430x380+500+50')
+        self.geometry(f'430x360+500+50')
         self.title('Zoo')
+
+        self.img = tk.PhotoImage(file='images/zoo.png')
+        tk.Label(self, image=self.img).pack()
 
         self.button(self, 'Add an animal', self.open_window1).place(x=60, y=30, width=300, height=20)
         self.button(self, 'Animal Ratings', self.open_window2).place(x=60, y=60, width=300, height=20)
@@ -38,7 +37,7 @@ class MainMenu(tk.Tk):  # главное меню
 
     @staticmethod
     def text(window):
-        return tk.Text(window, font=('Arial', 13), bg='#33ffe6')
+        return tk.Text(window, font=('Arial', 13), bg='#a5a29c')
 
     def open_window1(self):
         addingAnimals = AddingAnimals(self)
@@ -59,7 +58,9 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         super().__init__(parent)
         self.title('Adding animals')
         self['bg'] = '#33ffe6'
-        self.geometry(f'460x670+500+50')
+        self.geometry(f'460x700+500+50')
+
+        self.list_animal_type = data.list_animal_type
         self.valueStrSubspecies = tk.StringVar(self, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
         self.valueStrSubspecies.trace("r", self.data_checking)
         self.valueStrHabitat = tk.StringVar(self, 'est')  # аналогично для среды обитания
@@ -70,83 +71,79 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         self.valueBoolIsPredator = tk.StringVar(self, '2')  # создали переменную с числовым значением - хищник
         self.value_food = tk.StringVar()  # создали переменную для пищи животного
         self.value_food.trace("w", self.data_checking)
-        self.value_weight = tk.StringVar()  # создали переменную для веса животного
+        self.value_weight = tk.DoubleVar(self, value=0)  # создали переменную для веса животного
         self.value_weight.trace("w", self.data_checking)
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
         self.value_nickname.trace("w", self.data_checking)
 
-        self.subspecies_value = str()
-        self.habitat_value = str()
-        self.climate_value = str()
-        self.migratory_boolean = str()
-        self.predator_boolean = str()
-        self.food_value = str()
-        self.weight_value = str()
-        self.nickname_value = str()
+        self.migratory_boolean = None
+        self.predator_boolean = None
 
-        MainMenu.label(self, 'Выберите подвид животного:').place(x=10, y=10, width=240, height=20)
-        MainMenu.radiobutton(self, 'ground', self.valueStrSubspecies).place(x=10, y=40, width=80, height=20)
-        MainMenu.radiobutton(self, 'underwater', self.valueStrSubspecies).place(x=10, y=60, width=110, height=20)
-        MainMenu.radiobutton(self, 'winged', self.valueStrSubspecies).place(x=10, y=80, width=80, height=20)
+        MainMenu.label(self, 'Укажите тип животного:').place(x=10, y=10, width=200, height=20)
+        self.combo = ttk.Combobox(self, values=self.list_animal_type, font=('Arial', 10))
+        self.combo.place(x=220, y=10, width=230, height=20)
 
-        MainMenu.label(self, 'Укажите среду обитания данного подвида:').place(x=10, y=110, width=340, height=20)
-        MainMenu.radiobutton(self, 'forests', self.valueStrHabitat).place(x=10, y=140, width=80, height=20)
-        MainMenu.radiobutton(self, 'mountains', self.valueStrHabitat).place(x=10, y=160, width=100, height=20)
-        MainMenu.radiobutton(self, 'steppes', self.valueStrHabitat).place(x=10, y=180, width=85, height=20)
-        MainMenu.radiobutton(self, 'rivers', self.valueStrHabitat).place(x=10, y=200, width=65, height=20)
-        MainMenu.radiobutton(self, 'seas', self.valueStrHabitat).place(x=10, y=220, width=60, height=20)
-        MainMenu.radiobutton(self, 'ocean', self.valueStrHabitat).place(x=10, y=240, width=70, height=20)
+        MainMenu.label(self, 'Выберите подвид животного:').place(x=10, y=40, width=240, height=20)
+        MainMenu.radiobutton(self, 'ground', self.valueStrSubspecies).place(x=10, y=70, width=80, height=20)
+        MainMenu.radiobutton(self, 'underwater', self.valueStrSubspecies).place(x=10, y=90, width=110, height=20)
+        MainMenu.radiobutton(self, 'winged', self.valueStrSubspecies).place(x=10, y=110, width=80, height=20)
 
-        MainMenu.label(self, 'Являются ли миграционным:').place(x=10, y=270, width=240, height=20)
-        MainMenu.radiobutton(self, 'yes', self.valueBoolIsMigratory).place(x=10, y=300, width=55, height=20)
-        MainMenu.radiobutton(self, 'no', self.valueBoolIsMigratory).place(x=10, y=320, width=45, height=20)
+        MainMenu.label(self, 'Укажите среду обитания данного подвида:').place(x=10, y=140, width=340, height=20)
+        MainMenu.radiobutton(self, 'forests', self.valueStrHabitat).place(x=10, y=170, width=80, height=20)
+        MainMenu.radiobutton(self, 'mountains', self.valueStrHabitat).place(x=10, y=190, width=100, height=20)
+        MainMenu.radiobutton(self, 'steppes', self.valueStrHabitat).place(x=10, y=210, width=85, height=20)
+        MainMenu.radiobutton(self, 'rivers', self.valueStrHabitat).place(x=10, y=230, width=65, height=20)
+        MainMenu.radiobutton(self, 'seas', self.valueStrHabitat).place(x=10, y=250, width=60, height=20)
+        MainMenu.radiobutton(self, 'ocean', self.valueStrHabitat).place(x=10, y=270, width=70, height=20)
 
-        MainMenu.label(self, 'Укажите климатические условия:').place(x=10, y=350, width=270, height=20)
-        MainMenu.radiobutton(self, 'warm', self.valueStrClimate).place(x=10, y=380, width=70, height=20)
-        MainMenu.radiobutton(self, 'cold', self.valueStrClimate).place(x=10, y=400, width=60, height=20)
-        MainMenu.radiobutton(self, 'moderate', self.valueStrClimate).place(x=10, y=420, width=95, height=20)
+        MainMenu.label(self, 'Являются ли миграционным:').place(x=10, y=300, width=240, height=20)
+        MainMenu.radiobutton(self, 'yes', self.valueBoolIsMigratory).place(x=10, y=330, width=55, height=20)
+        MainMenu.radiobutton(self, 'no', self.valueBoolIsMigratory).place(x=10, y=350, width=45, height=20)
 
-        MainMenu.label(self, 'Явлиется ли зверь хищником:').place(x=10, y=450, width=245, height=20)
-        MainMenu.radiobutton(self, 'yes', self.valueBoolIsPredator).place(x=10, y=480, width=55, height=20)
-        MainMenu.radiobutton(self, 'no', self.valueBoolIsPredator).place(x=10, y=500, width=45, height=20)
+        MainMenu.label(self, 'Укажите климатические условия:').place(x=10, y=380, width=270, height=20)
+        MainMenu.radiobutton(self, 'warm', self.valueStrClimate).place(x=10, y=410, width=70, height=20)
+        MainMenu.radiobutton(self, 'cold', self.valueStrClimate).place(x=10, y=430, width=60, height=20)
+        MainMenu.radiobutton(self, 'moderate', self.valueStrClimate).place(x=10, y=450, width=95, height=20)
 
-        MainMenu.label(self, 'Какую пищу употребляет:').place(x=10, y=530, width=215, height=20)
-        MainMenu.entry(self, self.value_food).place(x=230, y=530, width=220, height=20)
+        MainMenu.label(self, 'Явлиется ли зверь хищником:').place(x=10, y=480, width=245, height=20)
+        MainMenu.radiobutton(self, 'yes', self.valueBoolIsPredator).place(x=10, y=510, width=55, height=20)
+        MainMenu.radiobutton(self, 'no', self.valueBoolIsPredator).place(x=10, y=530, width=45, height=20)
 
-        MainMenu.label(self, 'Укажите вес животного:').place(x=10, y=560, width=195, height=20)
-        MainMenu.entry(self, self.value_weight).place(x=230, y=560, width=220, height=20)
+        MainMenu.label(self, 'Какую пищу употребляет:').place(x=10, y=560, width=215, height=20)
+        MainMenu.entry(self, self.value_food).place(x=230, y=560, width=220, height=20)
 
-        MainMenu.label(self, 'Придумайте кличку для\n нового жителя зоопарка:').place(x=10, y=590, width=195, height=40)
-        MainMenu.entry(self, self.value_nickname).place(x=230, y=600, width=220, height=20)
+        MainMenu.label(self, 'Укажите вес животного:').place(x=10, y=590, width=195, height=20)
+        MainMenu.entry(self, self.value_weight).place(x=230, y=590, width=220, height=20)
 
-        MainMenu.button(self, 'exit', self.exit).place(x=380, y=640, width=70, height=20)
+        MainMenu.label(self, 'Придумайте кличку для\n нового жителя зоопарка:').place(x=10, y=620, width=195, height=40)
+        MainMenu.entry(self, self.value_nickname).place(x=230, y=630, width=220, height=20)
+
+        MainMenu.button(self, 'exit', self.exit).place(x=380, y=670, width=70, height=20)
         self.button = MainMenu.button(self, 'save', self.save)
         self.button.config(state='disabled')  # сделали кнопку неактивной
-        self.button.place(x=300, y=640, width=70, height=20)
+        self.button.place(x=300, y=670, width=70, height=20)
 
     def data_checking(self, *args):
+        type_value = len(self.combo.get()) > 1
         subspecies_value = self.valueStrSubspecies.get() != 'esth'
         habitat_value = self.valueStrHabitat.get() != 'est'
         climate_value = self.valueStrClimate.get() != 'es'
         migratory_boolean = self.valueBoolIsMigratory.get() != '1'
         predator_boolean = self.valueBoolIsPredator.get() != '2'
         food_value = len(self.value_food.get()) > 1
-        weight_value = len(self.value_weight.get()) > 1
+        weight_value = self.value_weight.get() > 0
         nickname_value = len(self.value_nickname.get()) > 1
-        if subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and weight_value and nickname_value:
+        if type_value and subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and weight_value and nickname_value:
+            print('lol')
             self.button.config(state='normal')
 
     def save(self):
-        self.subspecies_value = self.valueStrSubspecies.get()
-        self.habitat_value = self.valueStrHabitat.get()
-        self.climate_value = self.valueStrClimate.get()
         self.migratory_boolean = self.valueBoolIsMigratory.get() == 'yes'
         self.predator_boolean = self.valueBoolIsPredator.get() == 'no'
-        self.food_value = self.value_food.get()
-        self.weight_value = self.value_weight.get()
-        self.nickname_value = self.value_nickname.get()
-        print(self.subspecies_value, self.habitat_value, self.climate_value, self.migratory_boolean,
-              self.predator_boolean, self.food_value, self.weight_value, self.nickname_value)
+        print(self.value_nickname.get(), self.valueStrSubspecies.get(), self.predator_boolean, self.value_weight.get(),
+              self.valueStrHabitat.get(), self.valueStrClimate.get(), self.combo.get(), self.value_food.get(), self.migratory_boolean)
+        data.registration_animal(self.value_nickname.get(), self.valueStrSubspecies.get(), self.predator_boolean, self.value_weight.get(),
+              self.valueStrHabitat.get(), self.valueStrClimate.get(), self.combo.get(), self.value_food.get(), self.migratory_boolean)
         self.destroy()
 
     def exit(self):
@@ -156,18 +153,21 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
 
 """Просмотр рейтингов"""
 
-class AnimalRatings(tk.Toplevel):  # просмотр животных
+class AnimalRatings(tk.Toplevel):  # просмотр рейтингов
     def __init__(self, parent):
         super().__init__(parent)
         self['bg'] = '#33ffe6'
         self.geometry(f'430x380+500+50')
         self.title('Animal Ratings')
 
-        MainMenu.button(self, 'Top 3 Lightest Zoo Creatures', lambda: self.open_window(1)).place(x=60, y=30, width=300, height=20)
-        MainMenu.button(self, 'Top 5 biggest predators', lambda: self.open_window(2)).place(x=60, y=60, width=300, height=20)
-        MainMenu.button(self, 'List of herbivore names', lambda: self.open_window(3)).place(x=60, y=90, width=300, height=20)
-        MainMenu.button(self, 'List of underwater creatures\n in decreasing order of their weight', lambda: self.open_window(4)).place(x=60, y=120, width=300, height=40)
-        MainMenu.button(self, 'List of land animals,\n with each name and location', lambda: self.open_window(5)).place(x=60, y=170, width=300, height=40)
+        self.img = tk.PhotoImage(file='images/zoo2.png')
+        tk.Label(self, image=self.img).pack()
+
+        MainMenu.button(self, 'Топ 3 легких существ зоопарка', lambda: self.open_window(1)).place(x=60, y=30, width=300, height=20)
+        MainMenu.button(self, 'Топ 5 больших хищников', lambda: self.open_window(2)).place(x=60, y=60, width=300, height=20)
+        MainMenu.button(self, 'Сипсок имен травоядных существ', lambda: self.open_window(3)).place(x=60, y=90, width=300, height=20)
+        MainMenu.button(self, 'Список подводных существ\n по мере убывания их веса', lambda: self.open_window(4)).place(x=60, y=120, width=300, height=40)
+        MainMenu.button(self, 'Список наземных животных с\n именем каджого и местом обитания', lambda: self.open_window(5)).place(x=60, y=170, width=300, height=40)
         MainMenu.button(self, 'Exit', self.destroy).place(x=60, y=350, width=300, height=20)
         self.text = MainMenu.text(self)
         self.text.insert('end', f'Выберите текс')
@@ -177,31 +177,31 @@ class AnimalRatings(tk.Toplevel):  # просмотр животных
         self.text.delete('1.0', 'end')  # удалили предыдущий текст в текстовом окне
 
         if ark == 1:
-            list_light_creatures = Data().top_3
+            list_light_creatures = data.top_3
             for creature in list_light_creatures:  # топ 3 самых легких существа зоопарка
                 stroka = creature.nickname + ' ' + creature.clasAnimal + ' ' + str(creature.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')  # выводим строку
 
         elif ark == 2:
-            list_big_predator = Data().top_5
+            list_big_predator = data.top_5
             for pred in list_big_predator:  # топ 5 самых больших хищников
                 stroka = pred.nickname + ' ' + pred.clasAnimal + ' ' + str(pred.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 3:
-            list_herbivorous = Data().listHerbivorous
+            list_herbivorous = data.listHerbivorous
             for herbivorous in list_herbivorous:  # просмотр кличек травоядных существ
                 stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 4:
-            list_under_desc_weight = Data().top_7
+            list_under_desc_weight = data.top_7
             for under in list_under_desc_weight:  # просмотр подводных существ по мере убывания их веса
                 stroka = under.nickname + ' ' + under.clasAnimal + ' ' + str(under.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 5:
-            list_ground = Data().listGround
+            list_ground = data.listGround
             for ground in list_ground:  # просмотр наземных животных с кличкой каждого и местом обитания
                 stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + str(ground.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
@@ -217,9 +217,14 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         self.choice_animal = tk.StringVar()  # создали переменную для выбора животного
         self.name_animal = str()  # переменная куда бует сохраняться выбранное животное
         self.img = None  # переменная в которой лежит картинка животного
+        self.listAnimal = data.listAnimal
+        self.list_animal_names = data.list_animal_names
+
+        self.combo = ttk.Combobox(self, values=self.list_animal_names)
+        self.combo.place(x=240, y=10, width=100, height=20)
+
 
         MainMenu.label(self, text='Enter the name of the animal:').place(x=10, y=10, width=220, height=20)
-        MainMenu.entry(self, self.choice_animal).place(x=240, y=10, width=100, height=20)
         self.label = MainMenu.label(self, 'Список всех животных зоопарка')
         self.label.place(x=90, y=40, width=285, height=20)
         MainMenu.button(self, 'exit', self.destroy).place(x=350, y=350, width=70, height=20)
@@ -229,12 +234,12 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         self.text.place(x=70, y=70, width=300, height=270)
 
     def brings_out_animals(self):  # перечислили животных
-        for an in Data().listAnimal:
-            stroka = an.nickname + ' ' + an.clasAnimal
+        for an in self.listAnimal:
+            stroka = an.clasAnimal + ' - ' + an.nickname
             self.text.insert('end', f'{stroka}\n')
 
     def selected_animal(self):
-        self.name_animal = self.choice_animal.get()
+        self.name_animal = self.combo.get()
         if self.examination():  # вызвали функицю класс-метод
             if self.label['text'] != 'Список всех животных зоопарка':
                 self.label.config(text='Список всех животных зоопарка')
@@ -253,9 +258,8 @@ class SeeAnimals(tk.Toplevel):  # просмотр
             first_item.add_command(label='пищу', font=('Arial', 13))
 
             self.img = tk.PhotoImage(file=self.picture_selection())
-            tk.Label(window_animal, image=self.img).place(x=120, y=10)
+            tk.Label(window_animal, image=self.img).place(x=150, y=10)
             MainMenu.button(window_animal, 'exit', window_animal.destroy).place(x=350, y=350, width=70, height=20)
-            #MainMenu.button(window_animal, 'change', window_animal.destroy).place(x=260, y=350, width=80, height=20)
             text = MainMenu.text(window_animal)
             text.place(x=70, y=165, width=300, height=175)
             text.insert('end', f'{self.view_all_animals()}')
@@ -263,13 +267,13 @@ class SeeAnimals(tk.Toplevel):  # просмотр
             self.label.config(text='Вы указали неверное имя животного')
 
     def examination(self):  # проверяем есть ли выбранное животное в общем списке
-        for name in Data().listAnimal:
+        for name in self.listAnimal:
             if name.nickname == self.name_animal:
                 return True
         return False
 
     def view_all_animals(self):  # выводим информацию о животном
-        for anm in Data().listAnimal:
+        for anm in self.listAnimal:
             if anm.nickname == self.name_animal:
                 if anm.predator:
                     predator = 'да'
@@ -292,7 +296,7 @@ class SeeAnimals(tk.Toplevel):  # просмотр
                 return tyh
 
     def picture_selection(self):
-        if self.name_animal == 's':
+        if self.name_animal == 'Кеша':
             return 'images/popugay.png'
 
         elif self.name_animal == 'Зина':
