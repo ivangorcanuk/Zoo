@@ -1,38 +1,43 @@
 from animal_type import Parrot, Otter, Wolf, Hare, Roe, Buffalo, Ostrich, Dolphin, Tiger, Octopus, Crane, Pike, Zebra, Pigeon
 
 
-class WorkingFiles:
-    def reading(self):  # считывание с файла
+class FilesUtils:
+
+    @staticmethod
+    def reading():  # считывание с файла
         with open('animals.txt', 'r', encoding="utf-8") as file:
-            self.spisok = file.readlines()
+            spisok = file.readlines()
         listAnimals = list()  # список с животными зоопарка, который будем возвращать
         spTempAnimal = list()  # список для временного хранения информации о животных
-        for i in range(len(self.spisok)):
-            if self.spisok[i] == '\n':
+        for i in range(len(spisok)):
+            if spisok[i] == '\n':
                 break
-            s = self.spisok[i].split('#')
+            s = spisok[i].split('#')
             for j in range(len(s)):
                 if s[j] != '\n':
                     spTempAnimal.append(s[j])
                 else:
                     spTempAnimal[2] = spTempAnimal[2] == 'да'
                     spTempAnimal[8] = spTempAnimal[8] == 'да'
-                    obj = WorkingMethods().registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], float(spTempAnimal[3]),
+                    obj = WorkingUtils.registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], float(spTempAnimal[3]),
                     spTempAnimal[4], spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
+                    #print(obj.nickname)
                     listAnimals.append(obj)
                     spTempAnimal = list()
         return listAnimals
 
-    def record(self, listAnimal):  # запись в файл
+    @staticmethod
+    def record(listAnimal):  # запись в файл
         with open('animals.txt', 'w', encoding="utf-8") as file:
             for animal in listAnimal:
                 file.writelines(str(animal) + '\n')
             file.close()
 
 
-class WorkingMethods:
+class WorkingUtils:  # класс только с полезными методами не содержащий данных
 
-    def registrationAnimal(self, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
+    @staticmethod
+    def registrationAnimal(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
         obj = None
         if clasAnimal == 'попугай':
             obj = Parrot(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
@@ -64,21 +69,24 @@ class WorkingMethods:
             obj = Pigeon(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
         return obj
 
-    def animal_sorting_tupe(self, tupe, listAnimal):  # сортировка животных на хищных и травоядных
+    @staticmethod
+    def animal_sorting_tupe(tupe, listAnimal):  # сортировка животных на хищных и травоядных
         listOb = list()
         for animal in listAnimal:
             if tupe == animal.predator:
                 listOb.append(animal)
         return listOb
 
-    def animal_sorting_clas(self, clas, listAnimal):  # сортировка животных на наземные, подводные и крылатые
+    @staticmethod
+    def animal_sorting_clas(clas, listAnimal):  # сортировка животных на наземные, подводные и крылатые
         listOb = list()
         for animal in listAnimal:
             if clas == animal.typeAnimal:
                 listOb.append(animal)
         return listOb
 
-    def view_lungs_animal(self, listAnimal):  # топ 3 самых легких существа зоопарка
+    @staticmethod
+    def view_lungs_animal(listAnimal):  # топ 3 самых легких существа зоопарка
         list_light_creatures = list()
         for i in range(len(listAnimal)):
             for j in range(i, len(listAnimal)):
@@ -90,7 +98,8 @@ class WorkingMethods:
             if i == 2:
                 return list_light_creatures
 
-    def viewing_large_animal(self, listPredator):  # топ 5 самых больших хищников
+    @staticmethod
+    def viewing_large_animal(listPredator):  # топ 5 самых больших хищников
         list_big_predator = list()
         for i in range(len(listPredator)):
             for j in range(i, len(listPredator)):
@@ -102,7 +111,8 @@ class WorkingMethods:
             if i == 4:
                 return list_big_predator
 
-    def view_descending_weight(self, listUnderwater):  # просмотр подводных существ по мере убывания их веса
+    @staticmethod
+    def view_descending_weight(listUnderwater):  # просмотр подводных существ по мере убывания их веса
         list_under_desc_weight = list()
         for i in range(len(listUnderwater)):
             for j in range(i, len(listUnderwater)):
@@ -113,13 +123,15 @@ class WorkingMethods:
             list_under_desc_weight.append(listUnderwater[i])
         return list_under_desc_weight
 
-    def saves_animal_names(self, listAnimal):  # сохраняем в отдельный список клички животных
+    @staticmethod
+    def saves_animal_names(listAnimal):  # сохраняем в отдельный список клички животных
         list_animal_names = list()
         for name in listAnimal:
             list_animal_names.append(name.nickname)
         return list_animal_names
 
-    def saves_animal_type(self, listAnimal):  # сохраняем в отдельный список тип животных
+    @staticmethod
+    def saves_animal_type(listAnimal):  # сохраняем в отдельный список тип животных
         list_animal_type = list()
         for animal in listAnimal:
             list_animal_type.append(animal.clasAnimal)
