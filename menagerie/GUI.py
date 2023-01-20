@@ -60,6 +60,11 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         self['bg'] = '#33ffe6'
         self.geometry(f'460x700+500+50')
 
+        MainMenu.button(self, 'exit', self.exit).place(x=380, y=670, width=70, height=20)
+        self.button = MainMenu.button(self, 'save', self.save)
+        self.button.config(state='disabled')  # сделали кнопку неактивной
+        self.button.place(x=300, y=670, width=70, height=20)
+
         self.list_animal_type = data.list_animal_type
         self.valueStrSubspecies = tk.StringVar(self, 'esth')  # создали переменную со строковым значением подвид животного, которое будет возвращать наша радиокнопка
         self.valueStrSubspecies.trace("r", self.data_checking)
@@ -75,13 +80,14 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         self.value_weight.trace("w", self.data_checking)
         self.value_nickname = tk.StringVar()  # создали переменную для клички животного
         self.value_nickname.trace("w", self.data_checking)
+        self.value_combo = tk.StringVar()  # создали переменную для клички животного
+        self.value_combo.trace("r", self.data_checking)
 
         self.migratory_boolean = None
         self.predator_boolean = None
-        self.bul = False
 
         MainMenu.label(self, 'Укажите тип животного:').place(x=10, y=10, width=200, height=20)
-        self.combo = ttk.Combobox(self, values=self.list_animal_type, font=('Arial', 10))
+        self.combo = ttk.Combobox(self, values=self.list_animal_type, font=('Arial', 10), textvariable=self.value_combo)
         self.combo.place(x=220, y=10, width=230, height=20)
 
         MainMenu.label(self, 'Выберите подвид животного:').place(x=10, y=40, width=240, height=20)
@@ -119,26 +125,20 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         MainMenu.label(self, 'Придумайте кличку для\n нового жителя зоопарка:').place(x=10, y=620, width=195, height=40)
         MainMenu.entry(self, self.value_nickname).place(x=230, y=630, width=220, height=20)
 
-        MainMenu.button(self, 'exit', self.exit).place(x=380, y=670, width=70, height=20)
-        self.button = MainMenu.button(self, 'save', self.save)
-        self.button.config(state='disabled')  # сделали кнопку неактивной
-        self.button.place(x=300, y=670, width=70, height=20)
-
     def data_checking(self, *args):
-        type_value = len(self.combo.get()) > 1
+        type_value = len(self.value_combo.get()) > 1
         subspecies_value = self.valueStrSubspecies.get() != 'esth'
         habitat_value = self.valueStrHabitat.get() != 'est'
         climate_value = self.valueStrClimate.get() != 'es'
         migratory_boolean = self.valueBoolIsMigratory.get() != '1'
         predator_boolean = self.valueBoolIsPredator.get() != '2'
-        food_value = len(self.value_food.get()) > 1
+        food_value = len(self.value_food.get()) > 0
         weight_value = len(self.value_weight.get()) > 0
-        nickname_value = len(self.value_nickname.get()) > 1
-        if not self.bul:
-            if type_value and subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and float(weight_value) and nickname_value:
-                print('кнопка стала активной')
-                self.bul = True
-                self.button.config(state='normal')
+        nickname_value = len(self.value_nickname.get()) > 0
+        if type_value and subspecies_value and habitat_value and climate_value and migratory_boolean and predator_boolean and food_value and float(weight_value) and nickname_value:
+            self.button.config(state='normal')
+        elif self.button["state"] != tk.DISABLED:
+            self.button.config(state='disabled')
 
     def save(self):
         self.migratory_boolean = self.valueBoolIsMigratory.get() == 'yes'
@@ -221,9 +221,12 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         self.name_animal = str()  # переменная куда бует сохраняться выбранное животное
         self.img = None  # переменная в которой лежит картинка животного
         self.listAnimal = data.listAnimal
-        self.list_animal_names = data.list_animal_names
+        self.list_animal_type = list()
+        for type in self.listAnimal:
+            if type.clasAnimal not in self.list_animal_type:
+                self.list_animal_type.append(type.clasAnimal)
 
-        self.combo = ttk.Combobox(self, values=self.list_animal_names)
+        self.combo = ttk.Combobox(self, values=self.list_animal_type)
         self.combo.place(x=240, y=10, width=100, height=20)
 
 
@@ -299,44 +302,44 @@ class SeeAnimals(tk.Toplevel):  # просмотр
                 return tyh
 
     def picture_selection(self):
-        if self.name_animal == 'Кеша':
+        if self.name_animal == 'попугай':
             return 'images/popugay.png'
 
-        elif self.name_animal == 'Зина':
+        elif self.name_animal == 'выдра':
             return 'images/otter.png'
 
-        elif self.name_animal == 'Серый':
+        elif self.name_animal == 'волк':
             return 'images/wolf.png'
 
-        elif self.name_animal == 'Косой':
+        elif self.name_animal == 'заяц':
             return 'images/hare.png'
 
-        elif self.name_animal == 'Ренат':
+        elif self.name_animal == 'косуля':
             return 'images/roe.png'
 
-        elif self.name_animal == 'Гриша':
+        elif self.name_animal == 'бизон':
             return 'images/buffalo.png'
 
-        elif self.name_animal == 'Веня':
+        elif self.name_animal == 'страус':
             return 'images/ostrich.png'
 
-        elif self.name_animal == 'Джульета':
+        elif self.name_animal == 'дельфин':
             return 'images/dolphin.png'
 
-        elif self.name_animal == 'Полосатый':
+        elif self.name_animal == 'тигр':
             return 'images/tiger.png'
 
-        elif self.name_animal == 'Сан':
+        elif self.name_animal == 'осьминог':
             return 'images/octopus.png'
 
-        elif self.name_animal == 'Жура':
+        elif self.name_animal == 'журавль':
             return 'images/crane.png'
 
-        elif self.name_animal == 'Полосатая':
+        elif self.name_animal == 'щука':
             return 'images/pike.png'
 
-        elif self.name_animal == 'Черныш':
+        elif self.name_animal == 'зебра':
             return 'images/zebra.png'
 
-        elif self.name_animal == 'Гарик':
+        elif self.name_animal == 'голубь':
             return 'images/pigeon.png'
