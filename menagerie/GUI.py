@@ -5,6 +5,7 @@ from main import DataBackend
 
 data = DataBackend()
 
+
 class MainMenu(tk.Tk):  # главное меню
     def __init__(self):
         super().__init__()
@@ -17,7 +18,7 @@ class MainMenu(tk.Tk):  # главное меню
         self.button(self, 'Add an animal', self.open_window1).place(x=60, y=30, width=300, height=20)
         self.button(self, 'Animal Ratings', self.open_window2).place(x=60, y=60, width=300, height=20)
         self.button(self, 'See Animals', self.open_window3).place(x=60, y=90, width=300, height=20)
-        self.button(self, 'Exit', self.destroy).place(x=60, y=150, width=300, height=20)
+        self.button(self, 'Exit', self.exit).place(x=60, y=150, width=300, height=20)
 
     @staticmethod
     def button(window, text, command):
@@ -40,18 +41,24 @@ class MainMenu(tk.Tk):  # главное меню
         return tk.Text(window, font=('Arial', 13), bg='#a5a29c')
 
     def open_window1(self):
-        addingAnimals = AddingAnimals(self)
-        addingAnimals.grab_set()
+        adding_animals = AddingAnimals(self)
+        adding_animals.grab_set()
 
     def open_window2(self):
-        seeAnimals = AnimalRatings(self)
-        seeAnimals.grab_set()
+        see_animals = AnimalRatings(self)
+        see_animals.grab_set()
 
     def open_window3(self):
-        deleteAnimal = SeeAnimals(self)
-        deleteAnimal.grab_set()
+        delete_animal = SeeAnimals(self)
+        delete_animal.grab_set()
+
+    def exit(self):
+        data.save_info_file()
+        self.destroy()
+
 
 """Добавление животного"""
+
 
 class AddingAnimals(tk.Toplevel):  # добавить животное
     def __init__(self, parent):
@@ -154,7 +161,9 @@ class AddingAnimals(tk.Toplevel):  # добавить животное
         if com:
             self.destroy()
 
+
 """Просмотр рейтингов"""
+
 
 class AnimalRatings(tk.Toplevel):  # просмотр рейтингов
     def __init__(self, parent):
@@ -182,71 +191,83 @@ class AnimalRatings(tk.Toplevel):  # просмотр рейтингов
         if ark == 1:
             list_light_creatures = data.top_3
             for creature in list_light_creatures:  # топ 3 самых легких существа зоопарка
-                stroka = creature.nickname + ' ' + creature.clasAnimal + ' ' + str(creature.weight) + ' кг'
+                stroka = creature.nickname + ' ' + creature.clas_animal + ' ' + str(creature.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')  # выводим строку
 
         elif ark == 2:
             list_big_predator = data.top_5
             for pred in list_big_predator:  # топ 5 самых больших хищников
-                stroka = pred.nickname + ' ' + pred.clasAnimal + ' ' + str(pred.weight) + ' кг'
+                stroka = pred.nickname + ' ' + pred.clas_animal + ' ' + str(pred.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 3:
             list_herbivorous = data.listHerbivorous
             for herbivorous in list_herbivorous:  # просмотр кличек травоядных существ
-                stroka = herbivorous.nickname + ' ' + herbivorous.clasAnimal
+                stroka = herbivorous.nickname + ' ' + herbivorous.clas_animal
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 4:
             list_under_desc_weight = data.top_7
             for under in list_under_desc_weight:  # просмотр подводных существ по мере убывания их веса
-                stroka = under.nickname + ' ' + under.clasAnimal + ' ' + str(under.weight) + ' кг'
+                stroka = under.nickname + ' ' + under.clas_animal + ' ' + str(under.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
         elif ark == 5:
             list_ground = data.listGround
             for ground in list_ground:  # просмотр наземных животных с кличкой каждого и местом обитания
-                stroka = ground.nickname + ' ' + ground.clasAnimal + ' ' + str(ground.weight) + ' кг'
+                stroka = ground.nickname + ' ' + ground.clas_animal + ' ' + str(ground.weight) + ' кг'
                 self.text.insert('end', f'{stroka}\n')
 
+
 """Просмотр животных"""
+
 
 class SeeAnimals(tk.Toplevel):  # просмотр
     def __init__(self, parent):
         super().__init__(parent)
         self['bg'] = '#33ffe6'
-        self.geometry(f'430x380+500+50')
+        self.geometry(f'430x410+500+50')
         self.title('See Animals')
         self.choice_animal = tk.StringVar()  # создали переменную для выбора животного
-        self.name_animal = str()  # переменная куда бует сохраняться выбранное животное
+        self.choice_animal.trace('w', self.combo_box)
+        self.typ_animal = str()  # переменная куда бует сохраняться выбранное животное
         self.img = None  # переменная в которой лежит картинка животного
         self.listAnimal = data.listAnimal
-        self.list_animal_type = list()
-        for type in self.listAnimal:
-            if type.clasAnimal not in self.list_animal_type:
-                self.list_animal_type.append(type.clasAnimal)
+        self.list_animal_type = list()  # список с типом животн, который выводится в комбобксе
+        self.list_animal_name = list()  # список с именами животных, определенного типа
+        for typ in self.listAnimal:
+            if typ.clas_animal not in self.list_animal_type:
+                self.list_animal_type.append(typ.clas_animal)
 
-        self.combo = ttk.Combobox(self, values=self.list_animal_type)
-        self.combo.place(x=240, y=10, width=100, height=20)
+        MainMenu.label(self, text='Choose an animal type:').place(x=10, y=10, width=220, height=20)
 
+        self.combo_typ = ttk.Combobox(self, values=self.list_animal_type, textvariable=self.choice_animal)
+        self.combo_typ.place(x=240, y=10, width=100, height=20)
 
-        MainMenu.label(self, text='Enter the name of the animal:').place(x=10, y=10, width=220, height=20)
+        MainMenu.label(self, text='Enter the name of the animal:').place(x=10, y=40, width=220, height=20)
+
+        self.combo_name = ttk.Combobox(self, values=self.list_animal_name)
+        self.combo_name.place(x=240, y=40, width=100, height=20)
+
         self.label = MainMenu.label(self, 'Список всех животных зоопарка')
-        self.label.place(x=90, y=40, width=285, height=20)
-        MainMenu.button(self, 'exit', self.destroy).place(x=350, y=350, width=70, height=20)
-        MainMenu.button(self, 'search', self.selected_animal).place(x=350, y=10, width=70, height=20)
+        self.label.place(x=90, y=70, width=285, height=20)
+        MainMenu.button(self, 'exit', self.destroy).place(x=350, y=380, width=70, height=20)
+        MainMenu.button(self, 'search', self.selected_animal).place(x=350, y=25, width=70, height=20)
         self.text = MainMenu.text(self)
-        self.brings_out_animals()
-        self.text.place(x=70, y=70, width=300, height=270)
-
-    def brings_out_animals(self):  # перечислили животных
         for an in self.listAnimal:
-            stroka = an.clasAnimal + ' - ' + an.nickname
+            stroka = an.clas_animal + ' - ' + an.nickname
             self.text.insert('end', f'{stroka}\n')
+        self.text.place(x=70, y=100, width=300, height=270)
+
+    def combo_box(self, *args):
+        for i in self.listAnimal:
+            if self.choice_animal.get() == i.clas_animal:
+                self.list_animal_name.append(i.nickname)
+                print('wd')
 
     def selected_animal(self):
-        self.name_animal = self.combo.get()
-        if self.examination():  # вызвали функицю класс-метод
+        self.typ_animal = self.combo_typ.get()
+        if self.typ_animal in self.list_animal_type:  # вызвали функицю класс-метод
             if self.label['text'] != 'Список всех животных зоопарка':
                 self.label.config(text='Список всех животных зоопарка')
 
@@ -272,11 +293,11 @@ class SeeAnimals(tk.Toplevel):  # просмотр
         else:
             self.label.config(text='Вы указали неверное имя животного')
 
-    def examination(self):  # проверяем есть ли выбранное животное в общем списке
-        for name in self.listAnimal:
-            if name.nickname == self.name_animal:
-                return True
-        return False
+    # def examination(self):  # проверяем есть ли выбранное животное в общем списке
+    #     for name in self.listAnimal:
+    #         if name.nickname == self.name_animal:
+    #             return True
+    #     return False
 
     def view_all_animals(self):  # выводим информацию о животном
         for anm in self.listAnimal:
@@ -285,15 +306,15 @@ class SeeAnimals(tk.Toplevel):  # просмотр
                     predator = 'да'
                 else:
                     predator = 'нет'
-                tyh = f'Животное - {anm.clasAnimal}\n' \
+                tyh = f'Животное - {anm.clas_animal}\n' \
                       f'Кличка - {anm.nickname}\n' \
-                      f'Тип - {anm.typeAnimal}\n' \
+                      f'Тип - {anm.type_animal}\n' \
                       f'Хищник - {predator}\n' \
                       f'Масса - {anm.weight}\n' \
                       f'Место обитания - {anm.dwells}\n' \
                       f'Климат - {anm.climate}\n' \
                       f'Употребляемая пища - {anm.food}'
-                if anm.typeAnimal == 'крылатый':
+                if anm.type_animal == 'крылатый':
                     if anm.migratory:
                         migratory = 'да'
                     else:
