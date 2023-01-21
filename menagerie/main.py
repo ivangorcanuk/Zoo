@@ -19,10 +19,12 @@ class DataBackend:
         self.top_7 = WorkingUtils.view_descending_weight(self.listUnderwater.copy())  # топ 3 самых легких существа зоопарка
         print('создался объект класса DataBackend')
 
-    def registration_animal(self, nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
-        self.animal = WorkingUtils.registrationAnimal(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+    def registration_animal(self, nickname, typeAnimal, predator, weight, dwells, climate, clas_animal, food, migratory):
+        self.animal = WorkingUtils.registrationAnimal(nickname, typeAnimal, predator, weight, dwells, climate, clas_animal, food, migratory)
         self.listAnimal.append(self.animal)
-        print('отработал метод registration_animal и добавил животное в список')
+
+    def save_info_file(self):
+        FilesUtils.record(self.listAnimal)
 
 
 if __name__ == "__main__":

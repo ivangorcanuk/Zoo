@@ -21,7 +21,6 @@ class FilesUtils:
                     spTempAnimal[8] = spTempAnimal[8] == 'да'
                     obj = WorkingUtils.registrationAnimal(spTempAnimal[0], spTempAnimal[1], spTempAnimal[2], float(spTempAnimal[3]),
                     spTempAnimal[4], spTempAnimal[5], spTempAnimal[6], spTempAnimal[7], spTempAnimal[8])
-                    #print(obj.nickname)
                     listAnimals.append(obj)
                     spTempAnimal = list()
         return listAnimals
@@ -37,36 +36,36 @@ class FilesUtils:
 class WorkingUtils:  # класс только с полезными методами не содержащий данных
 
     @staticmethod
-    def registrationAnimal(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory):
+    def registrationAnimal(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food, migratory):
         obj = None
-        if clasAnimal == 'попугай':
-            obj = Parrot(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
-        elif clasAnimal == 'выдра':
-            obj = Otter(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'волк':
-            obj = Wolf(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'заяц':
-            obj = Hare(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'косуля':
-            obj = Roe(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'бизон':
-            obj = Buffalo(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'страус':
-            obj = Ostrich(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
-        elif clasAnimal == 'дельфин':
-            obj = Dolphin(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'тигр':
-            obj = Tiger(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'осьминог':
-            obj = Octopus(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'журавль':
-            obj = Crane(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
-        elif clasAnimal == 'щука':
-            obj = Pike(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'зебра':
-            obj = Zebra(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food)
-        elif clasAnimal == 'голубь':
-            obj = Pigeon(nickname, typeAnimal, predator, weight, dwells, climate, clasAnimal, food, migratory)
+        if clas_animal == 'попугай':
+            obj = Parrot(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food, migratory)
+        elif clas_animal == 'выдра':
+            obj = Otter(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'волк':
+            obj = Wolf(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'заяц':
+            obj = Hare(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'косуля':
+            obj = Roe(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'бизон':
+            obj = Buffalo(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'страус':
+            obj = Ostrich(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food, migratory)
+        elif clas_animal == 'дельфин':
+            obj = Dolphin(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'тигр':
+            obj = Tiger(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'осьминог':
+            obj = Octopus(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'журавль':
+            obj = Crane(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food, migratory)
+        elif clas_animal == 'щука':
+            obj = Pike(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'зебра':
+            obj = Zebra(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food)
+        elif clas_animal == 'голубь':
+            obj = Pigeon(nickname, type_animal, predator, weight, dwells, climate, clas_animal, food, migratory)
         return obj
 
     @staticmethod
@@ -81,7 +80,7 @@ class WorkingUtils:  # класс только с полезными метод�
     def animal_sorting_clas(clas, listAnimal):  # сортировка животных на наземные, подводные и крылатые
         listOb = list()
         for animal in listAnimal:
-            if clas == animal.typeAnimal:
+            if clas == animal.type_animal:
                 listOb.append(animal)
         return listOb
 
@@ -134,5 +133,5 @@ class WorkingUtils:  # класс только с полезными метод�
     def saves_animal_type(listAnimal):  # сохраняем в отдельный список тип животных
         list_animal_type = list()
         for animal in listAnimal:
-            list_animal_type.append(animal.clasAnimal)
+            list_animal_type.append(animal.clas_animal)
         return list_animal_type
